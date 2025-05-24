@@ -1,0 +1,574 @@
+/*** 
+
+====================================================================
+    Fun Fact Section
+====================================================================
+
+***/
+
+.fun-fact-section {
+    position: relative;
+    padding: 100px 0 478px;
+    background-color: #f3f4f7;
+    @include media-breakpoint-down(lg){
+        padding: 100px 0 448px;
+    }
+    &.style-two {
+        background-color: transparent;
+        padding: 0 0 70px;
+        @include media-breakpoint-down(lg){
+            padding: 0 0 40px;
+        }
+    }
+    &.style-three {
+        background-color: transparent;
+        padding: 167px 0 70px;
+        @include media-breakpoint-down(lg){
+            padding: 100px 0 40px;
+        }
+    }
+    .bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+.counter-block{
+    position: relative;
+    margin-bottom: 50px;
+    .inner-box {
+        position: relative;
+        border: 3px solid #e1e1e1;
+        padding: 70px 20px 40px;
+        max-width: 225px;
+        margin: 50px auto 0;
+        text-align: center;
+        @include transition(all 300ms ease);
+        @include media-breakpoint-down(xxl){
+            max-width: 100%;
+        }
+        &:hover{
+            .icon {
+                background-color: var(--theme-color-dark);
+                transform: rotate(-360deg);
+            }
+        }
+    }
+    .icon {
+        position: absolute;
+        top: -63px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: inline-block;
+        width: 125px;
+        height: 125px;
+        line-height: 125px;
+        font-size: 46px;
+        color: var(--theme-color-light);
+        border-radius: 50%;
+        box-shadow: 0 0px 43px rgba(0, 0, 0, .06);
+        background-color: var(--theme-color1);
+        text-align: center;
+        @include transition(all 300ms ease);
+    }
+    .count-box {
+        position: relative;
+        font-size: 48px;
+        font-weight: 700;
+        font-family: var(--title-font);
+        line-height: 1em;
+        color: var(--theme-color-dark);
+        .count-text {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 1em;
+            color: var(--theme-color-dark);
+        }
+    }
+
+    .counter-title {
+        position: relative;
+        margin-bottom: 0;
+        color: #7a7a7a;
+    }
+}
+
+/*** 
+
+====================================================================
+    Fun Fact Section Two
+====================================================================
+
+***/
+
+.fun-fact-section-two {
+    background-color: #F8F8F8;
+    padding: 120px 0;
+    position: relative;
+    @include media-breakpoint-down(lg){
+        padding: 90px 0 70px;
+    }
+    .float-image {
+        position: absolute;
+        right: 18px;
+        bottom: 0;
+        @include media-breakpoint-down(xxl){
+            display: none;
+        }
+    }
+    .shape-21 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 536px;
+        height: 436px;
+        background-image: url(../images/pattern/shape-21.png);
+        @include media-breakpoint-down(xl){
+            display: none;
+        }
+    }
+    .content-column {
+        .inner-column {
+            margin-top: 24px;
+            @include media-breakpoint-down(xl){
+                margin-top: 0;
+                margin-bottom: 50px;
+            }
+            .sec-title {
+                .text {
+                    br {
+                        @include media-breakpoint-down(xl){
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.counter-block-two {
+
+    position: relative;
+    margin-bottom: 20px;
+    .inner-box {
+        position: relative;
+        background-color: #fff;
+        padding: 39px 20px 31px;
+        text-align: center;
+        @include transition(all 300ms ease);
+        @include media-breakpoint-down(xxl){
+            max-width: 100%;
+        }
+        &:before {
+            position: absolute;
+            content: "";
+            background-color: var(--theme-color1);
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            left: 0;
+            @include transition(all 300ms ease);
+        }
+        &:hover{
+            &:before {
+                height: 100%;
+            }
+            .icon {
+                transform: scaleX(-1);
+                color: var(--theme-color-light);
+            }
+            .count-text {
+                color: var(--theme-color-light);
+            }
+            .counter-title {
+                color: var(--theme-color-light);
+            }
+        }
+    }
+    .icon {
+        margin-bottom: 10px;
+        display: inline-block;
+        font-size: 66px;
+        color: var(--theme-color1);
+        @include transition(all 300ms ease);
+    }
+    .count-box {
+        position: relative;
+        font-size: 48px;
+        font-weight: 700;
+        font-family: var(--title-font);
+        line-height: 1em;
+        color: var(--theme-color-dark);
+        .count-text {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 1em;
+            color: var(--theme-color-dark);
+            @include transition(all 300ms ease);
+        }
+    }
+
+    .counter-title {
+        position: relative;
+        margin-bottom: 0;
+        margin-top: 5px;
+        color: #444444;
+        @include transition(all 300ms ease);
+    }
+}
+
+/*** 
+
+====================================================================
+    Fun Fact Section Three
+====================================================================
+
+***/
+
+.fun-fact-section-three {
+    padding: 140px 0 120px;
+    position: relative;
+    @include media-breakpoint-down(lg){
+        padding: 90px 0 90px;
+    }
+    .bg-map-4 {
+        width: 873px;
+        height: 445px;
+        top: 110px;
+        left: calc(50% + -516px);
+        position: absolute;
+        background-image: url(../images/icons/bg-map-4.png);
+        @include media-breakpoint-down(md){
+            display: none;
+        }
+    }
+
+    .outer-box {
+        position: relative;
+        .image-box {
+            @include media-breakpoint-down(lg){
+                display: none;
+            }
+            .image {
+                border-radius: 50%;
+                margin-bottom: 0;
+                position: absolute;
+                border: 1px solid #DDDDDD;
+                padding: 5px;
+                img {
+                    border-radius: 50%;
+                }
+                .icon {
+                    border-radius: 50%;
+                    background-color: var(--theme-color1);
+                    color: var(--theme-color-light);
+                    position: absolute;
+                    font-size: 17px;
+                    width: 35px;
+                    height: 35px;
+                    line-height: 35px;
+                    right: 0;
+                    top: 0;
+                    padding-left: 2px;
+                    text-align: center;
+                }
+            }
+            .client1 {
+                top: 30px;
+                left: 110px;
+            }
+            .client2 {
+                bottom: 160px;
+                left: 5px;
+                .icon {
+                    font-size: 10px;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                }
+            }
+            .client3 {
+                bottom: 55px;
+                left: 170px;
+                .icon {
+                    font-size: 10px;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                }
+            }
+            .client4 {
+                bottom: 0;
+                right: 177px;
+                .icon {
+                    font-size: 12px;
+                    width: 24px;
+                    height: 24px;
+                    line-height: 24px;
+                }
+            }
+            .client5 {
+                top: 155px;
+                right: -6px;
+                .icon {
+                    font-size: 10px;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                }
+            }
+            .client6 {
+                top: -15px;
+                right: 134px;
+            }
+        }
+    }
+
+    .counter-block-three {
+        @include media-breakpoint-down(lg){
+            margin-bottom: 0;
+        }
+        .inner-box {
+            text-align: center;
+            .count-box {
+                color: var(--theme-color1);
+                font-family: var(--text-font);
+                font-size: 200px;
+                font-weight: 300;
+                @include media-breakpoint-down(md){
+                    font-size: 100px;
+                }
+                .count-text {
+                    color: var(--theme-color1);
+                    font-family: var(--text-font);
+                    font-size: 200px;
+                    font-weight: 300;
+                    @include media-breakpoint-down(md){
+                        font-size: 100px;
+                    }
+                }
+            }
+            .counter-title {
+                color: var(--theme-color2);
+                font-size: 40px;
+                font-weight: 400;
+                line-height: 50px;
+                margin-bottom: 49px;
+                margin-top: 22px;
+                @include media-breakpoint-down(md){
+                    font-size: 36px;
+                    margin-bottom: 20px;
+                    margin-top: 0;
+                }
+                @include media-breakpoint-down(sm){
+                    line-height: 40px;
+                    font-size: 30px;
+                    br {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .counter-btn-box {
+        .theme-btn {
+            width: 180px;
+            height: 60px;
+            line-height: 57px;
+            padding: 0;
+            text-align: center;
+            @include media-breakpoint-down(md){
+                width: 140px;
+                height: 50px;
+                line-height: 50px;
+            }
+            &.two {
+                background-color: transparent;
+                border: 1px solid var(--theme-color1);
+                color: var(--theme-color1);
+                margin-right: 17px;
+                @include media-breakpoint-down(sm){
+                    margin-right: 5px;
+                }
+                &:hover {
+                    color: var(--theme-color-light);
+                }
+            }
+        }
+    }
+}
+
+
+/*** 
+
+====================================================================
+    Fun Fact Section Four
+====================================================================
+
+***/
+
+.fun-fact-section-four {
+    padding: 140px 0 120px;
+    position: relative;
+    @include media-breakpoint-down(lg){
+        padding: 90px 0 90px;
+    }
+    .content-column {
+        .inner-column {
+            @include media-breakpoint-down(lg){
+                margin-bottom: 70px;
+            }
+            .sec-title {
+                border-bottom: 1px solid rgb(0, 0, 0, 10%);
+                padding-bottom: 50px;
+            }
+            .info-box {
+                color: var(--theme-color2);
+                font-size: 24px;
+                font-weight: 400;
+                a {
+                    color: var(--theme-color2);
+                }
+            }
+            .text {
+                font-size: 18px;
+                line-height: 36px;
+                margin-top: 20px;
+                margin-bottom: 60px;
+            }
+            .list-style-six {}
+        }
+    }
+    .counter-column {
+        .inner-column {}
+    }
+
+    .counter-block-four {
+        margin-bottom: 100px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .inner-box {
+            @include media-breakpoint-down(lg){
+                text-align: center;
+            }
+            .count-box {
+                color: var(--theme-color1);
+                font-family: var(--title-font);
+                font-size: 96px;
+                font-weight: 500;
+                border-bottom: 1px solid rgb(0, 0, 0, 10%);
+                padding-bottom: 52px;
+                margin-bottom: 15px;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke: 1px rgba(198, 148, 83);
+                .count-text {
+                    color: var(--theme-color1);
+                    font-size: 96px;
+                    font-weight: 500;
+                }
+            }
+            .counter-title {
+                color: var(--theme-color2);
+                font-size: 24px;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+
+/*** 
+
+====================================================================
+    Fun Fact Section Six
+====================================================================
+
+***/
+
+.funfacts-section-six {
+    position: relative;
+    padding: 120px 0 90px;
+    z-index: 3;
+}
+
+.counter-block-six {
+    margin-bottom: 30px;
+    .inner-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-bottom: 35px;
+        border-bottom: 1px solid rgb(255, 255, 255, .20);
+        @include transition(all 300ms ease);
+        @include media-breakpoint-down(lg){
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-top: 15px solid var(--theme-color1);
+            @include transition(all 300ms ease);
+        }
+        &:hover {
+            .icon {
+                transform: scaleX(-1);
+                color: var(--theme-color-light);
+            }
+        }
+    }
+    .content-box {
+        position: relative;
+    }
+    .icon {
+        position: relative;
+        display: inline-block;
+        font-size: 62px;
+        line-height: 1em;
+        margin-right: 50px;
+        color: var(--theme-color1);
+        @include transition(all 300ms ease);
+        @include media-breakpoint-down(lg){
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+    .count-box {
+        position: relative;
+        font-size: 60px;
+        line-height: 1em;
+        font-weight: 600;
+        color: var(--theme-color-light);
+        .count-text {
+            position: relative;
+            font-size: 60px;
+            line-height: 1em;
+            font-weight: 600;
+            color: var(--theme-color-light);
+        }
+    }
+    .counter-title {
+        position: relative;
+        font-size: 16px;
+        line-height: 30px;
+        font-weight: 400;
+        color: var(--theme-color-light);
+        margin-bottom: 0;
+    }
+}

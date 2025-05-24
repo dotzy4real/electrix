@@ -1,0 +1,138 @@
+/*** 
+
+====================================================================
+		Work Section
+====================================================================
+
+***/
+.work-section {
+  position: relative;
+  padding: 120px 0 70px;
+}
+.work-section:before {
+  position: absolute;
+  left: -260px;
+  top: 75px;
+  height: 590px;
+  width: 640px;
+  background-image: url(../images/icons/shape-10.png);
+  background-repeat: no-repeat;
+  background-position: center left;
+  content: "";
+}
+.work-section .sec-title {
+  margin-bottom: 50px;
+}
+
+.work-tabs {
+  position: relative;
+}
+.work-tabs .tab-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.work-tabs .tab-buttons .tab-btn {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 50px;
+  color: var(--theme-color1);
+  text-align: center;
+  padding: 30px 30px;
+  font-family: var(--title-font);
+  background-color: #f4f5f8;
+  cursor: pointer;
+}
+.work-tabs .tab-buttons .tab-btn.active-btn {
+  background-color: var(--bg-theme-color1);
+  color: #ffffff;
+}
+.work-tabs .content-column {
+  position: relative;
+  margin-bottom: 50px;
+}
+.work-tabs .content-column .inner-column {
+  padding: 0 35px;
+}
+.work-tabs .content-column .inner-column h3 {
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+.work-tabs .content-column .inner-column > .text {
+  margin-bottom: 40px;
+}
+.work-tabs .content-column .about-block-two:last-child {
+  margin-bottom: 0;
+}
+.work-tabs .image-column {
+  position: relative;
+  margin-bottom: 50px;
+}
+.work-tabs .image-column .image {
+  margin-bottom: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+header.main-header.header-style-three .btn-box {
+  margin-left: 90px;
+}
+
+.rc-slider-rail {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.rc-slider-track, .rc-slider-tracks {
+  position: absolute;
+  height: 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}
+
+.rc-slider-handle {
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin-top: -5px;
+  background-color: var(--theme-color-dark);
+  border: solid 2px var(--theme-color-dark);
+  border-radius: 50%;
+  cursor: pointer;
+  cursor: -webkit-grab;
+  cursor: grab;
+  opacity: 2.8;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -ms-touch-action: pan-x;
+      touch-action: pan-x;
+}
+
+.rc-slider-step {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.range-slider p {
+  position: absolute !important;
+  right: 0 !important;
+  top: -35px;
+  display: inline-block;
+  color: #ffffff !important;
+}

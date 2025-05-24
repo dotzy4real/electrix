@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "FlaticonElectric";
+  src: url("../fonts/flaticon-electric/flaticon-electric.eot");
+  src: url("../fonts/flaticon-electric/flaticon-electric.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/flaticon-electric/flaticon-electric.woff2") format("woff2"),
+       url("../fonts/flaticon-electric/flaticon-electric.woff") format("woff"),
+       url("../fonts/flaticon-electric/flaticon-electric.ttf") format("truetype"),
+       url("../fonts/flaticon-electric/flaticon-electric.svg#FlaticonElectric") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "FlaticonElectric";
+    src: url("../fonts/flaticon-electric/flaticon-electric.svg#FlaticonElectric") format("svg");
+  }
+}
+
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+  font-family: "FlaticonElectric" !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-001-light-bulb:before { content: "\f100"; }
+.flaticon-002-wires:before { content: "\f101"; }
+.flaticon-003-plug:before { content: "\f102"; }
+.flaticon-004-solar-panel:before { content: "\f103"; }
+.flaticon-005-accumulator:before { content: "\f104"; }
+.flaticon-006-danger:before { content: "\f105"; }
+.flaticon-007-rj45:before { content: "\f106"; }
+.flaticon-008-flashlight:before { content: "\f107"; }
+.flaticon-009-measure-tape:before { content: "\f108"; }
+.flaticon-010-resistor:before { content: "\f109"; }
+.flaticon-011-hand-drill:before { content: "\f10a"; }
+.flaticon-012-insulating-tape:before { content: "\f10b"; }
+.flaticon-013-tool-box:before { content: "\f10c"; }
+.flaticon-014-soldering-iron:before { content: "\f10d"; }
+.flaticon-015-power-strip:before { content: "\f10e"; }
+.flaticon-016-analyzer:before { content: "\f10f"; }
+.flaticon-017-wrench:before { content: "\f110"; }
+.flaticon-018-tester:before { content: "\f111"; }
+.flaticon-019-wires:before { content: "\f112"; }
+.flaticon-020-fuse-box:before { content: "\f113"; }
+.flaticon-021-fuse:before { content: "\f114"; }
+.flaticon-022-fuse:before { content: "\f115"; }
+.flaticon-023-telephone-socket:before { content: "\f116"; }
+.flaticon-024-socket:before { content: "\f117"; }
+.flaticon-025-diode:before { content: "\f118"; }
+.flaticon-026-pliers:before { content: "\f119"; }
+.flaticon-027-capacitor:before { content: "\f11a"; }
+.flaticon-028-pcb-board:before { content: "\f11b"; }
+.flaticon-029-electric-meter:before { content: "\f11c"; }
+.flaticon-030-screwdriver:before { content: "\f11d"; }
+.flaticon-031-led-lamp:before { content: "\f11e"; }
+.flaticon-032-glove:before { content: "\f11f"; }
+.flaticon-033-cutter:before { content: "\f120"; }
+.flaticon-034-hammer:before { content: "\f121"; }
+.flaticon-035-voltmeter:before { content: "\f122"; }
+.flaticon-036-riveter:before { content: "\f123"; }
+.flaticon-037-capacitor:before { content: "\f124"; }
+.flaticon-038-motor:before { content: "\f125"; }
+.flaticon-039-fuse:before { content: "\f126"; }
+.flaticon-040-switch:before { content: "\f127"; }
+.flaticon-041-switch:before { content: "\f128"; }
+.flaticon-042-boot:before { content: "\f129"; }
+.flaticon-043-circuit:before { content: "\f12a"; }
+.flaticon-044-plug:before { content: "\f12b"; }
+.flaticon-045-switch:before { content: "\f12c"; }
+.flaticon-046-extension-cord:before { content: "\f12d"; }
+.flaticon-047-extension-cord:before { content: "\f12e"; }
+.flaticon-048-crimping:before { content: "\f12f"; }
+.flaticon-049-wiring:before { content: "\f130"; }
+.flaticon-050-protect:before { content: "\f131"; }
