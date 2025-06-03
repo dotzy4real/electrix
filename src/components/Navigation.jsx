@@ -6,10 +6,10 @@ function Navigation() {
       <nav className="nav main-menu">
             <ul className="navigation">
               
-            {/*<li><Link to="/">Home</Link>
-              </li>*/}
+           <li><Link to="/">Home</Link>
+              </li>
               
-              <li className="current dropdown"><Link to="/">Home</Link>
+               {/*<li className="current dropdown"><Link to="/">Home</Link>
                 <ul>
                   <li><Link to="/">Home page 01</Link></li>
                   <li><Link to="/index-2">Home page 02</Link></li>
@@ -17,7 +17,7 @@ function Navigation() {
                   <li><Link to="/index-4">Home page 04</Link></li>
                   <li><Link to="/index-5">Home page 05</Link></li>
                 </ul>
-              </li>
+              </li>*/}
         <li className="dropdown">
           <Link to="#">About Us</Link>
           <ul>
@@ -61,10 +61,10 @@ function Navigation() {
               </li>*/}
               <li className="dropdown"><Link to="#">Subsidiaries</Link>
                 <ul>
-                  <li><Link to="">Armese</Link></li>
-                  <li><Link to="">Kilowatt Engineering</Link></li>
-                  <li><Link to="">Skyview</Link></li>
-                  <li><Link to="">MSMSL</Link></li>
+                  <li><Link to="/Armese">Armese</Link></li>
+                  <li><Link to="/Kilowatt-Engineering">Kilowatt Engineering</Link></li>
+                  <li><Link to="/MSMSL">MSMSL</Link></li>
+                  <li><Link to="/SkyView">Skyview</Link></li>
                 </ul>
               </li>
               {/*<li className="dropdown"><Link to="#">Blog</Link>

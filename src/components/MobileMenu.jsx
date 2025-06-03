@@ -61,6 +61,18 @@ const MobileMenu = () => {
                     <i className="fa fa-angle-down"></i>
                 </div>
             </li>
+                          <li className="dropdown">
+                            <Link to="#">Subsidiaries</Link>
+                            <ul className={menuState.activeMenu === 4 ? "d-block" : "d-none"}>
+                              <li><Link to="/Armese">Armese</Link></li>
+                              <li><Link to="/Kilowatt-Engineering">Kilowatt Engineering</Link></li>
+                              <li><Link to="/MSMSL">MSMSL</Link></li>
+                              <li><Link to="/skyview">Skyview</Link></li>
+                            </ul>
+                <div className={menuState.activeMenu === 4 ? "dropdown-btn active" : "dropdown-btn"} onClick={() => handleMenuClick(4)} >
+                    <i className="fa fa-angle-down"></i>
+                </div>
+                          </li>
             <li className="dropdown">
                 <Link to="#">Blog</Link>
             </li>

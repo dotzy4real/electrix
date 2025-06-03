@@ -1,9 +1,9 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomeOne from "./components/HomeOne/index.jsx";
-import HomeTwo from "./components/HomeTwo/index.jsx";
-import HomeThree from "./components/HomeThree/index.jsx";
-import HomeFour from "./components/HomeFour/index.jsx";
-import HomeFive from "./components/HomeFive/index.jsx";
+import HomeTwo from "./components/SkyviewSubsidiary/index.jsx";
+import HomeThree from "./components/ArmeseSubsidiary/index.jsx";
+import HomeFour from "./components/MsmslSubsidiary/index.jsx";
+import HomeFive from "./components/KilowattSubsidiary/index.jsx";
 import AboutUs from "./components/AboutUs/index.jsx";
 import Career from "./components/AboutUs/Career.jsx";
 import Services from "./components/ServicesPages/index.jsx";
@@ -38,19 +38,19 @@ const router = createBrowserRouter([
         element: <HomeOne />
       },
       {
-        path: "/index-2",
+        path: "/SkyView",
         element: <HomeTwo />
       },
       {
-        path: "/index-3",
+        path: "/Armese",
         element: <HomeThree />
       },
       {
-        path: "/index-4",
+        path: "/MSMSL",
         element: <HomeFour />
       },
       {
-        path: "/index-5",
+        path: "/Kilowatt-Engineering",
         element: <HomeFive />
       },
       {

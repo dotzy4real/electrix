@@ -4,8 +4,8 @@ import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import About from './About.jsx';
-import Video2 from '../HomeTwo/Video2.jsx';
-import Service from '../HomeTwo/Service.jsx';
+{/*import Video2 from '../SkyviewSubsidiary/Video2.jsx';
+import Service from '../SkyviewSubsidiary/Service.jsx';*/}
 import Project from '../HomeOne/Project.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/about_us.jpeg';
 

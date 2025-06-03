@@ -31,8 +31,8 @@ function Banner({ className }) {
         <>
             <section className={`banner-section ${className || ''}`}>
                 <Swiper {...swiperOptions} className="banner-carousel owl-theme">
-      <div className="swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
-      <div className="swiper-button-next">{/**/<i class="fa fa-chevron-right"></i>}</div>
+      <div className="swiper-button-prev"><i className="fa fa-chevron-left"></i></div>
+      <div className="swiper-button-next">{/**/<i className="fa fa-chevron-right"></i>}</div>
                     <SwiperSlide className="slide-item">
                         <div className="bg-image" style={{ backgroundImage: `url(${BannerImage1})`}}/>
                         <div className="auto-container">
