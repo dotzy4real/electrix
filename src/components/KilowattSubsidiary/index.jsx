@@ -14,7 +14,7 @@ import Project from './Project.jsx';
 import Portfolio from './Portfolio.jsx';
 import Project2 from './Project2.jsx';
 import Faq from './Faq.jsx';
-import Contact from './Contact2.jsx';
+import Contact2 from './Contact2.jsx';
 import Testimonial from './Testimonial.jsx';
 import News from './News.jsx';
 import Cta from './Cta.jsx';
@@ -35,7 +35,7 @@ function HomeFive() {
             <ChooseUs2 />*/}
             <Team />
             {/*<News />*/}
-            <Contact />
+            <Contact2 />
             <Footer />
             <BackToTop />
         </>

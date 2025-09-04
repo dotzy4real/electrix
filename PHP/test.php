@@ -1,0 +1,1 @@
+<?php echo ("In the PHP area prope"); exit; ?>

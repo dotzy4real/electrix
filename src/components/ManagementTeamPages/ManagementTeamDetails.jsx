@@ -1,28 +1,159 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate  } from 'react-router-dom';
 import BackToTop from '../BackToTop.jsx';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import ProgressBar from '../../lib/ProgressBar.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/management_team.png';
+const imgPath = '/src/assets/images/resource/pagebanners';
 
 // Import images
 import TeamDetailsImg from '../../assets/images/resource/management_team/emmanuel_audu.jpg';
+const teamImgPath = '/src/assets/images/resource/management_team';
 
 function TeamDetails() {
+
+
+const { id } = useParams("id");
+const navigate = useNavigate();
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [member, setMember] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+const [memberLoaded, setMemberLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getManagementTeam/"+id);
+        if (!response.ok) { console.log("it broke");
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("checking here");
+        setMember(result);
+        console.log("member board id: " + member.management_team_id);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getPage/management_team");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setMemberLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
     return (
         <>
+        {  memberLoaded && ( <div>
             <InnerHeader />
             <PageTitle
                 title="Management Team"
                 breadcrumb={[
                     { link: '/', title: 'Home' },
-                    { link: '/management-team', title: 'Management Team' },
-                    { title: 'Engr. (Dr.) Emmanuel Audu-Ohwavborua (FNSE, PMP)' },
+                    { link: '/management-team', title: data.page_breadcumb_title },
+                    { title: member.management_team_name },
                 ]}
-                banner={PageBanner}
+                banner={imgPath+"/"+data.page_banner}
             />
+
+
+
+
+
+{(() => {
+                                            if (member.length === 0)
+                                            {
+            {navigate('/page-doest-not-exist')}
+                                            } else {
+            
+return (
+            <section className="team-details">
+                <div className=""/>
+                <div className="container pb-100">
+                    <div className="team-details__top pb-70">
+                        <div className="row">
+                            <div className="col-xl-6 col-lg-6">
+                                <div className="team-details__top-left">
+                                    <div className="team-details__top-img"> <img src={teamImgPath+"/"+member.management_team_pic} alt="Image"/>
+                                        <div className="team-details__big-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6">
+                                <div className="team-details__top-right">
+                                    <div className="team-details__top-content">
+                                        <h3 className="team-details__top-name">{member.management_team_name}</h3>
+                                        <p className="team-details__top-title">{member.management_team_designation}</p>
+                                        <p className="page-content team">
+                                        <div dangerouslySetInnerHTML={{ __html: member.management_team_content }} />
+                                        
+</p>
+                                        {(() => {
+                                            if (member.management_team_email != "")
+                                            {
+                                                return (
+                                        <div className="team-details-contact mb-30">
+                                            <h5 className="mb-0">Email Address</h5>
+                                            <div className=""><span>{member.management_team_email}</span></div>
+                                        </div>);
+                                        }
+                                        })()}
+
+                                        {(() => {
+                                            if (member.management_team_phone != "")
+                                            {
+                                                return (
+                                                <div className="team-details-contact mb-30">
+                                                    <h5 className="mb-0">Phone Number</h5>
+                                                    <div className=""><span>{member.management_team_phone}</span></div>
+                                                </div>);
+                                        }
+                                        })()}
+                                        {/*
+                                        <div className="team-details-contact">
+                                            <h5 className="mb-0">Web Address</h5>
+                                            <div className=""><span>www.yourdomain.com</span></div>
+                                        </div>*/}
+                                        <div className="team-details__social"> <Link to="#"><i className="fab fa-linkedin"></i></Link><Link to="#"><i className="fab fa-facebook"></i></Link><Link to="#"><i className="fab fa-twitter"></i></Link></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/*
+
+                                            
+
+
             <section className="team-details">
                             <div className=""/>
                             <div className="container pb-100">
@@ -54,18 +185,13 @@ A graduate with a B.Sc. (Hons) in Electrical Engineering from the University of 
                                                         <h5 className="mb-0">Phone Number</h5>
                                                         <div className=""><span>+012-3456-789</span></div>
                                                     </div>
-                                                    {/*
-                                                    <div className="team-details-contact">
-                                                        <h5 className="mb-0">Web Address</h5>
-                                                        <div className=""><span>www.yourdomain.com</span></div>
-                                                    </div>*/}
                                                     <div className="team-details__social"> <Link to="#"><i className="fab fa-linkedin"></i></Link><Link to="#"><i className="fab fa-facebook"></i></Link><Link to="#"><i className="fab fa-twitter"></i></Link></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {/*<div className="team-details__bottom pt-100">
+                                <div className="team-details__bottom pt-100">
                                     <div className="row">
                                         <div className="col-xl-6 col-lg-6">
                                             <div className="team-details__bottom-left">
@@ -83,9 +209,16 @@ A graduate with a B.Sc. (Hons) in Electrical Engineering from the University of 
                                             </div>
                                         </div>
                                     </div>
-                                </div>*/}
+                                </div>
                             </div>
-                        </section>
+                        </section>*/}
+
+
+</div>
+            </section>)
+        }
+})()}
+
                         {/*}
             <section className="team-contact-form">
                 <div className="container pb-100">
@@ -134,7 +267,7 @@ A graduate with a B.Sc. (Hons) in Electrical Engineering from the University of 
                 </div>
             </section>*/}
             <Footer />
-            <BackToTop />
+            <BackToTop /></div>)}
         </>
     );
 }

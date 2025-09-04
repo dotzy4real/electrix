@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import ProjectThumb1 from '../../assets/images/msmsl/facility/facility1.jpg';
 import ProjectThumb2 from '../../assets/images/msmsl/facility/facility2.jpg';
@@ -8,6 +8,34 @@ import ProjectThumb5 from '../../assets/images/msmsl/facility/facility3.jpg';
 import ProjectThumb6 from '../../assets/images/msmsl/facility/facility2.jpg';
 
 function Footer({ className }) {
+    
+    
+    const ApiUrl = import.meta.env.VITE_API_URL;
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(ApiUrl + "msmsl/getContactInfo");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            setData(result);
+          } catch (error) {
+            setError(error);
+          } finally {
+            setLoading(false);
+            setDataLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
     return (
         <>
             <footer className={`main-footer ${className || ''}`}>
@@ -42,13 +70,13 @@ function Footer({ className }) {
                                 <div className="footer-widget contact-widget">
                                     <h5 className="widget-title">Contact</h5>
                                     <div className="widget-content">
-                                        <div className="text">Nkop Road, Awa-Iman
-Akwa Ibom
-
+                                        <div className="text">{/*Nkop Road, Awa-Iman
+Akwa Ibom*/}
+{data.msmsl_contact_info_address}
 </div>
                                         <ul className="contact-info">
                                             {/*<li><i className="fa fa-envelope"></i> <Link to="mailto:needhelp@yourdomain.com">needhelp@company.com</Link><br /></li>*/}
-                                            <li><i className="fa fa-phone-square"></i><Link to="tel:+2349057777754">(+234) 9057777754
+                                            <li><i className="fa fa-phone-square"></i><Link to={"tel:" + data.msmsl_contact_info_phone}>{data.msmsl_contact_info_phone}
 
                                             </Link><br /></li>
                                         </ul>

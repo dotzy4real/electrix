@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import ProjectThumb1 from '../../assets/images/kilowatt/projects/project1.jpg';
 import ProjectThumb2 from '../../assets/images/kilowatt/projects/project2.jpg';
@@ -8,6 +8,34 @@ import ProjectThumb5 from '../../assets/images/kilowatt/projects/project2.jpg';
 import ProjectThumb6 from '../../assets/images/kilowatt/projects/project1.jpg';
 
 function Footer({ className }) {
+    
+    
+    const ApiUrl = import.meta.env.VITE_API_URL;
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(ApiUrl + "skyview/getContactInfo");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            setData(result);
+          } catch (error) {
+            setError(error);
+          } finally {
+            setLoading(false);
+            setDataLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
     return (
         <>
             <footer className={`main-footer ${className || ''}`}>
@@ -42,11 +70,12 @@ function Footer({ className }) {
                                 <div className="footer-widget contact-widget">
                                     <h5 className="widget-title">Contact</h5>
                                     <div className="widget-content">
-                                        <div className="text">3B Oroma Close, Off Olu – Obasoanjo  Road,  Port Harcourt, Rivers State
+                                        <div className="text">{/*3B Oroma Close, Off Olu – Obasoanjo  Road,  Port Harcourt, Rivers State*/}
+                                        {data.skyview_contact_info_address}
                                         </div>
                                         <ul className="contact-info">
                                             {/*<li><i className="fa fa-envelope"></i> <Link to="mailto:needhelp@yourdomain.com">needhelp@company.com</Link><br /></li>*/}
-                                            <li><i className="fa fa-phone-square"></i> <Link to="tel:080333677033">08033367703</Link><br /></li>
+                                            {/*<li><i className="fa fa-phone-square"></i> <Link to="tel:080333677033">08033367703</Link><br /></li>*/}<li><i className="fa fa-phone-square"></i> <Link to={"tel:"+data.skyview_contact_info_phone}>{data.skyview_contact_info_phone}</Link><br /></li>
                                         </ul>
                                     </div>
                                 </div>

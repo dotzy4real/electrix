@@ -1,21 +1,69 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate  } from 'react-router-dom';
 import BackToTop from '../BackToTop.jsx';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import AboutSide from '../AboutUs/AboutSide.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/services.jpeg';
+const bannerPath = '/src/assets/images/resource/pagebanners';
 
 import ServiceDetailsImage from '../../assets/images/resource/services/engineering_procurement.jpg';
 import ServiceD1Image from '../../assets/images/resource/service-d1.jpg';
 import ServiceD2Image from '../../assets/images/resource/service-d2.jpg';
+const imgPath = '/src/assets/images/resource/services';
 
 function ServicesDetails() {
-    const [showQues, setQues] = useState(1);
-    const openQuestion = (value) => {
-        setQues(value);
-    };
+	
+	const { id } = useParams("id");
+	const ApiUrl = import.meta.env.VITE_API_URL;
+	const [data, setData] = useState([]);
+	const [service, setService] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [dataLoaded, setDataLoaded] = useState(false);
+	
+	useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await fetch(ApiUrl + "electrix/getService/" + id);
+			if (!response.ok) {
+			  throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const result = await response.json();
+			setService(result);
+		  } catch (error) {
+			setError(error);
+		  } finally {
+			setLoading(false);
+			setDataLoaded(true);
+		  }
+		};
+	
+		fetchData();
+	  }, []);
+	  
+	  
+	  useEffect(() => {
+		  const fetchData = async () => {
+			try {
+			  const response = await fetch(ApiUrl + "electrix/getPage/what_we_do");
+			  if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			  }
+			  const result = await response.json();
+			  setData(result);
+			} catch (error) {
+			  setError(error);
+			} finally {
+			  setLoading(false);
+			  setMemberLoaded(true);
+			}
+		  };
+	  
+		  fetchData();
+		}, []);
+
 
     return (
         <>
@@ -24,19 +72,23 @@ function ServicesDetails() {
                 title="What We Do"
                 breadcrumb={[
                     { link: '/', title: 'Home' },
-                    { link: '/what-we-do', title: 'What We Do' },
-                    { title: 'ENGINEERING, PROCUREMENT & CONSTRUCTION (EPC)' },
+                    { link: '/what-we-do', title: data.page_breadcumb_title },
+                    { title: service.service_title },
                 ]}
-				banner = {PageBanner}
+                banner={bannerPath+"/"+data.page_banner}
             />
 		    <section className="services-details">
 				<div className="container">
 					<div className="row">
-						<div className="col-xl-8 col-lg-7 general-details-page">
+						<div className="col-xl-8 col-lg-7 general-details-page padtop">
 							<div className="services-details__content">
-								<img src={ServiceDetailsImage} alt="Image"/>
-								<h3 className="mt-4">ENGINEERING, PROCUREMENT & CONSTRUCTION (EPC)</h3>
-								<div>Income Electrix Limited (IEL) has over 30 years of experience in providing EPC Services in the African Power Sector. Our Expertise cuts across the following areas: 
+								<img src={imgPath + "/" + service.service_large_pic} alt="Image"/>
+								<h3 className="mt-4">{service.service_title}</h3>
+								<div>
+									
+									<div dangerouslySetInnerHTML={{ __html: service.service_content }} />
+									{/*
+									Income Electrix Limited (IEL) has over 30 years of experience in providing EPC Services in the African Power Sector. Our Expertise cuts across the following areas: 
 									
 <ul>
 <li>EPC of Power Generation Projects up to 252MW.</li>
@@ -53,7 +105,7 @@ function ServicesDetails() {
 
 <li>Engineering/Consulting Services</li>
 
-<li>Specialized Procurement Services</li></ul>
+<li>Specialized Procurement Services</li></ul>*/}
   </div>
 								
 								

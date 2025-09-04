@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectBgImage from '../../assets/images/background/33.jpg';
 import ProjectImage1 from '../../assets/images/kilowatt/services/service1.jpg';
@@ -8,13 +8,15 @@ import ProjectImage4 from '../../assets/images/kilowatt/services/service4.jpg';
 import ProjectImage5 from '../../assets/images/kilowatt/services/service5.jpg';
 import ExpertImage1 from '../../assets/images/resource/expert1.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import "swiper/css/navigation";
+const imgPath = '/src/assets/images/kilowatt/';
 
 
 const swiperOptions = {
-    modules: [Autoplay, Pagination],
+    modules: [Autoplay, Pagination, Navigation],
     slidesPerView: 4,
     spaceBetween: 30,
     autoplay: {
@@ -41,27 +43,81 @@ const swiperOptions = {
         1350: {
             slidesPerView: 4,
         },
-    }
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 };
 
 
 function Service({ className }) {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "kilowatt/fetchServices");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
     return (
         <>
+        {  dataLoaded && (
             <section id="services" className={`project-section-five ${className || ''}`}>
                 <div className="bg bg-image" style={{ backgroundImage: `url(${ProjectBgImage})`}}/>
-                <div className="auto-container">
+                <div className="auto-container kilowatt-services">
                     <div className="sec-title text-center kilowatt servicekilowatt">
                         <span className="sub-title">OUR SERVICES</span>
-                        <h2>We Delivered  Best <br />Electrical Services</h2>
+                        <h2>We Deliver  Best <br />Electrical Services</h2>
                     </div>
                     <div className="carousel-outer">
                         <Swiper {...swiperOptions} className="projects-carousel-five owl-theme">
+      <div className="swiper-button-prev"><i className="fa fa-chevron-left"></i></div>
+      <div className="swiper-button-next"><i className="fa fa-chevron-right"></i></div>
+
+      {data.map(item => (
+        <SwiperSlide key={item.kilowatt_service_id} className="project-block-five">
+                                <div className="inner-box">
+                                    <div className="image-box">
+                                        <figure className="image"><Link to={imgPath + "services/" + item.kilowatt_service_pic} className="lightbox-image"><img src={imgPath + "services/" + item.kilowatt_service_pic}  alt="Image"/></Link></figure>
+                                        {/* <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link> */}
+                                    </div>
+                                    <div className="content-box">
+                                        <span className="cat">{item.kilowatt_service_title}
+                                        </span>
+                                        <h4 className="title"><Link to={""}>{item.kilowatt_service_category_name}</Link></h4>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+
+))}
+{/*
+
+
                             <SwiperSlide className="project-block-five">
                                 <div className="inner-box">
                                     <div className="image-box">
                                         <figure className="image"><Link to={ProjectImage1} className="lightbox-image"><img src={ProjectImage1} alt="Image"/></Link></figure>
-                                        <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link>
+                                        
                                     </div>
                                     <div className="content-box">
                                         <span className="cat">Renewable Energy Research & Product Development
@@ -74,7 +130,7 @@ function Service({ className }) {
                                 <div className="inner-box">
                                     <div className="image-box">
                                         <figure className="image"><Link to={ProjectImage2} className="lightbox-image"><img src={ProjectImage2} alt="Image"/></Link></figure>
-                                        <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link>
+                                        
                                     </div>
                                     <div className="content-box">
                                         <span className="cat">Utility & Regulatory Support Services
@@ -87,7 +143,7 @@ function Service({ className }) {
                                 <div className="inner-box">
                                     <div className="image-box">
                                         <figure className="image"><Link to={ProjectImage3} className="lightbox-image"><img src={ProjectImage3} alt="Image"/></Link></figure>
-                                        <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link>
+                                        
                                     </div>
                                     <div className="content-box">
                                         <span className="cat">Power Distribution Infrastructure & Equipment  Maintenance
@@ -100,7 +156,7 @@ function Service({ className }) {
                                 <div className="inner-box">
                                     <div className="image-box">
                                         <figure className="image"><Link to={ProjectImage4} className="lightbox-image"><img src={ProjectImage4} alt="Image"/></Link></figure>
-                                        <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link>
+                                        
                                     </div>
                                     <div className="content-box">
                                         <span className="cat">Power Source and Utilization  Optimization
@@ -113,7 +169,7 @@ function Service({ className }) {
                                 <div className="inner-box">
                                     <div className="image-box">
                                         <figure className="image"><Link to={ProjectImage5} className="lightbox-image"><img src={ProjectImage2} alt="Image"/></Link></figure>
-                                        <Link to="/page-project-details" className="icon"><i className="fa fa-long-arrow-alt-right"></i></Link>
+                                        
                                     </div>
                                     <div className="content-box">
                                         <span className="cat">Energy Efficiency & Consultancy Services
@@ -121,7 +177,7 @@ function Service({ className }) {
                                         <h4 className="title"><Link to="/page-project-details">Energy</Link></h4>
                                     </div>
                                 </div>
-                            </SwiperSlide>
+                            </SwiperSlide>*/}
                         </Swiper>
                     </div>
                     {/*<div className="expert-info-box">
@@ -135,7 +191,7 @@ function Service({ className }) {
                         </div>
                     </div>*/}
                 </div>
-            </section>
+            </section>)}
         </>
     );
 }

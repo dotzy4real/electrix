@@ -1,18 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate  } from 'react-router-dom';
 import BackToTop from '../BackToTop.jsx';
-import { Link } from 'react-router-dom';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import Project from '../HomeOne/Project.jsx';
 import AboutSide from '../AboutUs/AboutSide.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/portfolio.png';
+const bannerPath = '/src/assets/images/resource/pagebanners';
 
 // Import images
 import projectDetailImage from '../../assets/images/resource/projects/project-details/254-mw-gas.jpg';
+const imgPath = '/src/assets/images/resource/projects';
 
 
-function ProjectsDetails() {
+function ProjectsDetails() {    
+        
+        const { id } = useParams("id");
+        const ApiUrl = import.meta.env.VITE_API_URL;
+        const [data, setData] = useState([]);
+        const [project, setProject] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+        const [dataLoaded, setDataLoaded] = useState(false);
+        
+        useEffect(() => {
+            const fetchData = async () => {
+              try {
+                const response = await fetch(ApiUrl + "electrix/getProject/" + id);
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                setProject(result);
+              } catch (error) {
+                setError(error);
+              } finally {
+                setLoading(false);
+                setDataLoaded(true);
+              }
+            };
+        
+            fetchData();
+          }, []);
+          
+          
+          useEffect(() => {
+              const fetchData = async () => {
+                try {
+                  const response = await fetch(ApiUrl + "electrix/getPage/what_we_have_done");
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  const result = await response.json();
+                  setData(result);
+                } catch (error) {
+                  setError(error);
+                } finally {
+                  setLoading(false);
+                  setMemberLoaded(true);
+                }
+              };
+          
+              fetchData();
+            }, []);
+
+
     return (
         <>
             <InnerHeader />
@@ -20,10 +73,10 @@ function ProjectsDetails() {
                 title="What We Have Done"
                 breadcrumb={[
                     { link: '/', title: 'Home' },
-                    { link: '/project-details', title: 'What We Have Done' },
-                    { title: 'EPC of 252 MW Gas Power Plant Construction at Omoku' },
+                    { link: '/what-we-have-done', title: data.page_breadcumb_title },
+                    { title: project.project_title },
                 ]}
-                banner={PageBanner}
+                banner={bannerPath+"/"+data.page_banner}
             />
             	
             <section className="project-details">
@@ -31,11 +84,11 @@ function ProjectsDetails() {
                     <div className="row">
                         <div className="col-xl-8 col-lg-7 general-details-page">
                             <div className="sec-title">
-                                <span className="sub-title">WHAT WE HAVE DONE</span>
-                                <h2>EPC of 252 MW Gas Power Plant Construction at Omoku</h2>
+                                <span className="sub-title">{data.page_title}</span>
+                                <h2>{project.project_title}</h2>
                             </div>
                             <div className="project-details__top">
-                                <div className="project-details__img"><img src={projectDetailImage} alt="Image"/></div>
+                                <div className="project-details__img"><img src={imgPath+"/"+project.project_pic} alt="Image"/></div>
                             </div>
                             <div className="row justify-content-center">
                                 <div className="col-xl-12">
@@ -44,15 +97,15 @@ function ProjectsDetails() {
                                             <div className="row">
                                                 <div className="col-lg-4">
                                                     <p className="project-details__client">Date</p>
-                                                    <h4 className="project-details__name">10 January, 2025</h4>
+                                                    <h4 className="project-details__name">{project.project_date}</h4>
                                                 </div>
                                                 <div className="col-lg-4">
                                                     <p className="project-details__client">Client</p>
-                                                    <h4 className="project-details__name">Omoku Generation Company Limited</h4>
+                                                    <h4 className="project-details__name">{project.project_client}</h4>
                                                 </div>
                                                 <div className="col-lg-4">
                                                     <p className="project-details__client">Location</p>
-                                                    <h4 className="project-details__name">Omoku, Delta State, Nigeria</h4>
+                                                    <h4 className="project-details__name">{project.project_location}</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,7 +117,9 @@ function ProjectsDetails() {
                                     <div className="col-xl-12">
                                         <div className="project-details__content-left">
                                             <h3 className="mb-4 mt-5">Details</h3>
-                                            <div className="">Design, Engineering, Supply, Installation, Testing and Commissioning of 3 MVA (6x500KVA) Diesel Generating Power Plant at Obudu, Cross River State.
+                                            <div className="">
+                                            <div dangerouslySetInnerHTML={{ __html: project.project_content }} />
+                                            {/*Design, Engineering, Supply, Installation, Testing and Commissioning of 3 MVA (6x500KVA) Diesel Generating Power Plant at Obudu, Cross River State.*/}
                                             </div>
                                         </div>
                                     </div>

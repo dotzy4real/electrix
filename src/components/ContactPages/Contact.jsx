@@ -1,12 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BackToTop from '../BackToTop.jsx';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/contact_us.png';
+const imgPath = '/src/assets/images/resource/pagebanners';
 
 function Contact() {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [contact, setContact] = useState([]);
+const [dataLoaded, setDataLoaded] = useState(false);
+const [phones, setPhones] = useState([]);
+
+useEffect(() => {
+	const fetchData = async () => {
+	  try {
+		const response = await fetch(ApiUrl + "electrix/getPage/contact");
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		const result = await response.json();
+		console.log(result);
+		setData(result);
+	  } catch (error) {
+		setError(error);
+	  } finally {
+		setLoading(false);
+		setDataLoaded(true);
+	  }
+	};
+
+	fetchData();
+  }, []);
+  
+  useEffect(() => {
+	  const fetchData = async () => {
+		try {
+		  const response = await fetch(ApiUrl + "electrix/getContactInfo");
+		  if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		  }
+		  const result = await response.json();
+		  setContact(result);
+		  const phoneNos = result.contact_info_phone.split(",");
+		  setPhones(phoneNos);
+		} catch (error) {
+		  setError(error);
+		} finally {
+		  setLoading(false);
+		  setDataLoaded(true);
+		}
+	  };
+  
+	  fetchData();
+	}, []);
+
+
+
     return (
         <>
         <InnerHeader />
@@ -14,9 +69,9 @@ function Contact() {
 	        title="Contact Us"
 	        breadcrumb={[
 	            { link: '/', title: 'Home' },
-	            { title: 'Contact' },
+	            { title: data.page_breadcumb_title },
 	        ]}
-			banner={PageBanner}
+			banner={imgPath+"/"+data.page_banner}
 	    />
 	  	{/* <!--Contact Details Start--> */}
 	  	<section className="contact-details">
@@ -65,11 +120,14 @@ function Contact() {
 	  				<div className="col-xl-5 col-lg-6">
 	  					<div className="contact-details__right">
 	  						<div className="sec-title">
-	  							<span className="sub-title">Need any help?</span>
-	  							<h2>Get in touch with us</h2>
-	  							<div className="text">Have questions or need assistance?
+	  							<span className="sub-title">{data.page_icon_title}</span>
+	  							<h2>{data.page_title}</h2>
+	  							<div className="text">
+									
+								  <div dangerouslySetInnerHTML={{ __html: data.page_content }} />
+									{/*Have questions or need assistance?
 <br/><br/>
-We're here to help. Reach out to us by filling the form on this page and we will get back to you with the assistance you need.</div>
+We're here to help. Reach out to us by filling the form on this page and we will get back to you with the assistance you need.*/}</div>
 	  						</div>
 	  						<ul className="list-unstyled contact-details__info">
 	  							<li className="d-block d-sm-flex align-items-sm-center ">
@@ -78,7 +136,8 @@ We're here to help. Reach out to us by filling the form on this page and we will
 	  								</div>
 	  								<div className="text ml-xs--0 mt-xs-10">
 	  									<h6>Have any question?</h6>
-	  									<a href="tel:07055990728">+234 (0) 7055990728</a>, <a href="tel:07055990729">+234 (0) 7055990729 </a>
+										  {phones.map((item, index) => ( <a key={item.trim()} href={"tel:"+item.trim()}>{item}{index < phones.length-1? ",":""}</a> ))}
+	  									{/*<a href="tel:07055990728">+234 (0) 7055990728</a>, <a href="tel:07055990729">+234 (0) 7055990729 </a>*/}
 	  								</div>
 	  							</li>
 	  							<li className="d-block d-sm-flex align-items-sm-center ">
@@ -87,8 +146,7 @@ We're here to help. Reach out to us by filling the form on this page and we will
 	  								</div>
 	  								<div className="text ml-xs--0 mt-xs-10">
 	  									<h6>Write email</h6>
-	  									<a href="mailto:info@incomeelectrix.com
-">info@incomeelectrix.com</a>
+	  									<a href={"mailto:"+contact.contact_info_email}>{contact.contact_info_email}</a>
 	  								</div>
 	  							</li>
 	  							<li className="d-block d-sm-flex align-items-sm-center ">
@@ -97,9 +155,9 @@ We're here to help. Reach out to us by filling the form on this page and we will
 	  								</div>
 	  								<div className="text ml-xs--0 mt-xs-10">
 	  									<h6>Visit anytime</h6>
-	  									<div>POWER HOUSE<br/>
+	  									<div><div dangerouslySetInnerHTML={{ __html: contact.contact_info_address }} />{/*POWER HOUSE<br/>
 Km 16, Port Harcourt-Aba Expressway<br/>
-Port Harcourt, Rivers State – Nigeria.</div>
+Port Harcourt, Rivers State – Nigeria.*/}</div>
 	  								</div>
 	  							</li>
 	  						</ul>

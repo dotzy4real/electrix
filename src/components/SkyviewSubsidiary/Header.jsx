@@ -151,7 +151,7 @@ function Header({ className = '', scroll = false}) {
                     <div className="auto-container">
                         <div className="inner-container">
                             <div className="logo">
-                                <Link to="/"><img src={Stickylogo} alt=""/></Link>
+                                <Link to="/"><img src={logo1} alt=""/></Link>
                             </div>
                             <div className="nav-outer">
                                 <nav className="main-menu">

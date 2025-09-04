@@ -1,10 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RangeSlider2 from '../../lib/RangeSlider2.jsx';
 import ContactBgImage from '../../assets/images/background/3.jpg';
 import ContactBgImage1 from '../../assets/images/background/4.jpg';
 
 
 function Contact({ className }) {
+
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [features, setFeatures] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getFeature");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(ApiUrl + "electrix/getFeatureLists");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const result = await response.json();
+          setFeatures(result);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoading(false);
+          setDataLoaded(true);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+
     return (
         <>
             <section id="contact" className={`contact-section ${className || ''}`}>
@@ -16,9 +66,23 @@ function Contact({ className }) {
                                 <div className="inner-column wow fadeInRight">
                                     <div className="sec-title light">
                                         <span className="sub-title">FEATURES</span>
-                                        <h2>Services that meet our customers electrical needs</h2>
-                                        <div className="text">We strongly support best practices across our entire operations around the world and across various transporation sectors. Your sincere happiness is our sincere satisfaction.</div>
+                                        <h2>{data.feature_title}</h2>
+                                        <div className="text">{data.feature_snippet}</div>
                                     </div>
+
+                                    {features.map(item => (
+
+                                    <div className="feature-block-two">
+                                        <div className="inner-box"> <i className="icon flaticon-011-hand-drill"></i>
+                                            <div className="content">
+                                                <h5 className="title">{item.feature_list_title}</h5>
+                                                <div className="text">{item.feature_list_snippet}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ))}
+
+{/*
                                     <div className="feature-block-two">
                                         <div className="inner-box"> <i className="icon flaticon-011-hand-drill"></i>
                                             <div className="content">
@@ -35,6 +99,8 @@ function Contact({ className }) {
                                             </div>
                                         </div>
                                     </div>
+*/}
+
                                 </div>
                             </div>
                             <div className="form-column col-lg-6 col-md-12 col-sm-12">

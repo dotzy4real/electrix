@@ -178,6 +178,93 @@ p, .text {
   line-height: var(--body-line-height);
 }
 
+.text.aboutContent ul {
+  padding-top:40px; padding-bottom:10px;
+}
+
+.aboutContent ul li {
+  position: relative;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 25px;
+  font-weight: 400;
+  color: #444444;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  margin-bottom: 14px;
+}
+
+.aboutContent ul li:before { 
+  position: absolute;
+  left: 0;
+  top: 3px;
+  content: "\f058";
+  font-weight: 900;
+  font-size: 18px;
+  font-family: "Font Awesome 6 Pro";
+  color: var(--theme-color1);
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+}
+.aboutContent.kilowatt ul li:before { 
+  color: var(--theme-color5);
+}
+.armese .aboutContent.text { padding-top:0px;}
+.kilowatt .team-details__top-title {
+  color: var(--theme-color5);
+}
+.kilowatt .team-details__social a { background-color: var(--theme-color5);}
+
+.skyview .team-details__top-title {
+  color: var(--theme-color4);
+}
+.skyview .team-details__social a { background-color: var(--theme-color4);}
+
+.skyview.csms_content ul { 
+  margin-top: 20px;     
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.skyview.csms_content ul li:before
+{    position: absolute;
+  left: 0;
+  top: 2px;
+  content: "\f061";
+  font-weight: 900;
+  font-size: 12px;
+  font-family: "Font Awesome 6 Pro";
+  color: var(--theme-color-light);
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  background-color: var(--theme-color4);
+  text-align: center;
+}
+.skyview.csms_content ul li {
+  position: relative;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 30px;
+  font-weight: 400;
+  color: #444444;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  margin-bottom: 14px;
+}
+
+.project-dark { color: #fff;}
+
 /* -------- Headings ---------- */
 h1, h2, h3, h4, h5, h6 {
   color: var(--headings-color);
@@ -1198,6 +1285,9 @@ Scroll To Top style
 .kilowatt .social-icon-two li a:hover {
   color: var(--theme-color5);
 }
+.skyview .social-icon-two li a:hover {
+  color: var(--theme-color4);
+}
 
 /*Social Icon Three*/
 .social-icon-three {
@@ -1886,10 +1976,13 @@ Scroll To Top style
   background-color: var(--theme-color1) !important;
 }
 .kilowatt .btn-style-one.bg-dark {
-  background-color: var(--theme-color5) !important;
+  background-color: var(--theme-color5) !important; transition: all 0.5s linear 0s;
 }
 .kilowatt .btn-style-one.bg-dark:before {
   background-color: var(--theme-color5) !important;
+}
+.kilowatt .btn-style-one.bg-dark:hover, .kilowatt .btn-style-one.bg-dark:hover:before {
+  background-color: var(--theme-color5-dark) !important;
 }
 
 /*Btn Style two*/
@@ -3585,7 +3678,7 @@ Main Header
 .header-style-three .main-box:before {
   position: absolute;
   content: "";
-  width: 535px;
+  width: 420px;
   height: 100%;
   right: 0;
   top: 0;
@@ -3596,7 +3689,7 @@ Main Header
 }
 @media (max-width: 1799.98px) {
   .header-style-three .main-box:before {
-    width: 511px;
+    width: 420px;
   }
 }
 @media (max-width: 1699.98px) {
@@ -3627,7 +3720,7 @@ Main Header
 .header-style-three .main-box:after {
   position: absolute;
   content: "";
-  width: 555px;
+  width: 425px;
   height: 100%;
   right: 0;
   top: 0;
@@ -3637,7 +3730,7 @@ Main Header
 }
 @media (max-width: 1799.98px) {
   .header-style-three .main-box:after {
-    width: 526px;
+    width: 426px;
   }
 }
 @media (max-width: 1699.98px) {
@@ -5828,6 +5921,30 @@ Section Title
 .team-carousel .swiper-button-next
 {
   top: 35%; right: -40px; color: #ccc;
+}
+.kilowatt-services .swiper-button-prev, .kilowatt-projects .swiper-button-prev
+{
+  top: 50%;
+} 
+.kilowatt-services .swiper-button-next, .kilowatt-projects .swiper-button-next
+{
+  top: 44%;
+} 
+.armese-projects .swiper-button-prev
+{
+  top: 50%;
+}
+.armese-projects .swiper-button-next
+{
+  top: 43%;
+}
+.skyview-services .swiper-button-prev
+{
+  top: 40%;
+}
+.skyview-services .swiper-button-next
+{
+  top: 33%;
 }
 /*
 .swiper-button-next::after {
@@ -8638,6 +8755,7 @@ figure.rounded img {
 .about-section-four .content-column .btn-box .founder-info .thumb img {
   border: 2px solid var(--theme-color1);
   border-radius: 50%;
+  width:65px; height: 65px;
 }
 .about-section-four .content-column .btn-box .founder-info .name {
   margin-bottom: 0;
@@ -9364,13 +9482,15 @@ figure.rounded img {
   position: relative;
   padding: 120px 0 120px;
 }
+.aboutContent.text { margin-top: 30px;}
 .about-section-eight.general-details-page {
   padding: 0px;
 }
 .about-section-eight.general-details-page .content-column .inner-column {
   padding-left: 0px;
 }
-.general-details-page ul { margin-top: 20px;}
+.general-details-page ul { margin-top: 0px;}
+.general-details-page.padtop ul { margin-top: 20px;}
 .about_side .side-bar-content { padding:0px 20px; font-style:italic; color: var(--theme-color-dark1);}
 .about_in_side.sidebar__category-list{
   color: var(--theme-color-dark1);
@@ -13934,6 +14054,7 @@ header.main-header.header-style-three .btn-box {
           transform: translateY(-20px);
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
+  color: var(--text-color);
 }
 
 /***
@@ -19153,7 +19274,7 @@ header.main-header.header-style-three .btn-box {
   right: 0;
   width: 540px;
   height: 738px;
-  background-image: url(../images/resource/contact6.png);
+  /*background-image: url(../images/resource/contact6.png);*/
 }
 @media (max-width: 1653.98px) {
   .contact-section-seven .contact6 {
@@ -23431,8 +23552,8 @@ Sidebar
       -ms-flex: 70px 0 0px;
           flex: 70px 0 0;
 }
-.sidebar__post .sidebar__post-list .sidebar__post-image > img {
-  width: 80px;
+.sidebar__post .sidebar__post-list .sidebar__post-image > img, .sidebar__post .sidebar__post-list .sidebar__post-image > a > img {
+  width: 80px; height:40px;
   border-radius: 10px;
 }
 .sidebar__post .sidebar__post-list .sidebar__post-content {
@@ -23585,7 +23706,7 @@ Sidebar
   margin-left: 5px;
   border-radius: 30px;
 }
-.sidebar__tags-list a:hover {
+.sidebar__tags-list a:hover, .sidebar__tags-list a.active {
   color: var(--text-color-bg-theme-color1);
   background: var(--theme-color1);
 }
@@ -24185,6 +24306,9 @@ Sidebar
 }
 .kilowatt .user-links li a:before {
   background-color: var(--theme-color5);
+}
+.skyview .user-links li a:before {
+  background-color: var(--theme-color4);
 }
 .user-links li a:hover:before {
   width: 100%;

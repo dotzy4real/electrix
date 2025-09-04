@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AboutSide from './AboutSide.jsx';
 import BackToTop from '../BackToTop.jsx';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/career.jpeg';
+const imgPath = 'src/assets/images/resource/pagebanners';
 
 function Career() {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getPage/career");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
     return (
         <>
             <InnerHeader />
@@ -14,19 +43,22 @@ function Career() {
                 title="Career"
                 breadcrumb={[
                     { link: '/', title: 'Home' },
-                    { title: 'Careers' },
+                    { title: data.page_breadcumb_title },
                 ]}
-                banner={PageBanner}
+                banner={imgPath+"/"+data.page_banner}
             />
             <section className="blog-details">
                 <div className="container">
                 <div className="row">
                     <div className="col-xl-8 col-lg-7 general-details-page">
-                        <h2>Career</h2>
+                    {(() => { if (data.page_show_title == 'active') { 
+                            return (    <div>
+                        <h2>{data.page_title}</h2>
                         
                         <div className="sec-about-title">
-                        <span className="sub-title">Build your career with us</span>
-                        </div>
+                        <span className="sub-title">{data.page_title_caption}</span>
+                        </div></div>)
+                        }})()}
                         <div className='page-content'>
                             <form id="contact_form" name="contact_form" action="/page-contact" method="get">
                                 <div className="row">

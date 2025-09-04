@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Import images
@@ -11,13 +11,79 @@ import TeamImg6 from '../../assets/images/resource/management_team/alero_eigbobo
 import TeamImg7 from '../../assets/images/resource/management_team/kenu_sarah.jpg';
 import TeamImg8 from '../../assets/images/resource/management_team/nwaochuwku_iloanwsi.jpg';
 import TeamImg9 from '../../assets/images/resource/management_team/eric_peekate.jpg';
+const imgPath = '/src/assets/images/resource/management_team';
 
 function ManagementTeam() {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [member, setMember] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+	const fetchData = async () => {
+	  try {
+		const response = await fetch(ApiUrl + "electrix/fetchManagementTeam");
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		const result = await response.json();
+		setData(result);
+	  } catch (error) {
+		setError(error);
+	  } finally {
+		setLoading(false);
+		setDataLoaded(true);
+	  }
+	};
+
+	fetchData();
+  }, []);
+
     return (
         <>
 <section className="team-section pb-90">
     <div className="auto-container">
         <div className="row wow fadeInUp">
+
+		{(() => { if (data.page_show_title == 'active') { 
+                            return (    <div>
+                        <h2>{data.page_title}</h2>
+                        
+                        <div className="sec-about-title">
+                        <span className="sub-title">{data.page_title_caption}</span>
+                        </div></div>)
+                        }})()}
+			
+			
+			{data.map(item => (
+	
+				<div className="col-lg-4 col-sm-6">
+					<div className="team-block mb-30">
+						<div className="inner-box">
+						<div className="image-box">
+							<figure className="image"><Link to={"/management-team/details/"+item.management_team_id}><img src={imgPath+"/"+item.management_team_pic} alt="Image"/></Link></figure>
+							<div className="info-box">
+							<h4 className="name"><Link to={"/management-team/details/"+item.management_team_id}>{item.management_team_name}</Link></h4>
+							<span className="designation">{item.management_team_designation}</span> <span className="share-icon fa fa-share-alt"></span>
+							<div className="social-links">
+								<Link to={item.management_team_linkedin}><i className="fab fa-linkedin"></i></Link>
+								<Link to={item.management_team_facebook}><i className="fab fa-facebook-f"></i></Link>
+								<Link to={item.management_team_twitter}><i className="fab fa-twitter"></i></Link>
+							</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			))}
+
+
+
+{/*
+
       	    <div className="col-lg-4 col-sm-6">
 			    <div className="team-block mb-30">
 			      <div className="inner-box">
@@ -36,6 +102,7 @@ function ManagementTeam() {
 			      </div>
 			    </div>
       	    </div>
+
             <div className="col-lg-4 col-sm-6">
 			    <div className="team-block mb-30">
 			      <div className="inner-box">
@@ -179,7 +246,7 @@ function ManagementTeam() {
 			        </div>
 			      </div>
 			    </div>
-      	    </div>
+			</div> */}
         </div>
     </div>
 </section>

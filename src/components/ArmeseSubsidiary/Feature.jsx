@@ -1,8 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FeatureImage from '../../assets/images/armese/capabilities1.jpg';
 
-function Process({ className }) {
+function Feature({ className }) {
+        
+        const ApiUrl = import.meta.env.VITE_API_URL;
+        const [data, setData] = useState([]);
+        const [phones, setPhones] = useState([]);
+        const [contact, setContact] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+        const [dataLoaded, setDataLoaded] = useState(false);
+        
+        useEffect(() => {
+            const fetchData = async () => {
+              try {
+                const response = await fetch(ApiUrl + "armese/getCapabilities");
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                setData(result);
+              } catch (error) {
+                setError(error);
+              } finally {
+                setLoading(false);
+                setDataLoaded(true);
+              }
+            };
+        
+            fetchData();
+          }, []);
+          
+            useEffect(() => {
+                const fetchData = async () => {
+                  try {
+                    const response = await fetch(ApiUrl + "armese/getContactInfo");
+                    if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const result = await response.json();
+                    setContact(result);
+                    const phoneNos = result.armese_contact_info_phone.split(",");
+                    setPhones(phoneNos);
+                    console.log("my data: " + contact);
+                  } catch (error) {
+                    setError(error);
+                  } finally {
+                    setLoading(false);
+                    setDataLoaded(true);
+                  }
+                };
+            
+                fetchData();
+              }, []);
+        
     return (
         <>
 
@@ -18,6 +70,20 @@ function Process({ className }) {
 	            <h2>Services that help our <br /> Customers meet</h2>
 	          </div>
 	          <div className="row"> 
+              
+      {data.map(item => (
+
+        <div key={item.armese_capability_id} className="feature-block-three col-lg-4 col-sm-6">
+                <div className="inner-box"> <i className={"icon " + item.armese_capability_icon}></i>
+                  <h5 className="title">{item.armese_capability_title}</h5>
+                  <div className="text">{item.armese_capability_content} 
+                  </div>
+                </div>
+	            </div>
+
+      ))}
+
+      {/*
 	            <div className="feature-block-three col-lg-4 col-sm-6">
                 <div className="inner-box"> <i className="icon flaticon-023-telephone-socket"></i>
                   <h5 className="title">Billing System</h5>
@@ -38,7 +104,8 @@ function Process({ className }) {
                   </div>
                 </div>
               </div>
-              <Link to="tel:+2348037272707" className="info-btn"> <i className="icon fa fa-phone"></i> <small>Call Anytime</small> <strong>(234) 803 727 2707
+*/}
+              <Link to={"tel:" + phones[0]} className="info-btn"> <i className="icon fa fa-phone"></i> <small>Call Anytime</small> <strong>{phones[0]}
               </strong> </Link>
 	          </div>
 	        </div>
@@ -50,6 +117,8 @@ function Process({ className }) {
             </div>
           </div>
         </div>
+
+
 	    </div>
 	  </div>
 	</section>
@@ -58,4 +127,4 @@ function Process({ className }) {
     );
 }
 
-export default Process;
+export default Feature;

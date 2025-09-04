@@ -11,6 +11,7 @@ import Projects from "./components/ProjectsPages/index.jsx";
 import ProjectsDetails from "./components/ProjectsPages/ProjectsDetails.jsx";
 import News from "./components/NewsPages/index.jsx";
 import NewsDetails from "./components/NewsPages/NewsDetails.jsx";
+import NewsType from "./components/NewsPages/NewsType.jsx";
 import BoardMemberDetails from "./components/BoardMembersPages/BoardMemberDetails.jsx";
 import ManagementTeamDetails from "./components/ManagementTeamPages/ManagementTeamDetails.jsx";
 import Contact from "./components/ContactPages/Contact.jsx";
@@ -98,7 +99,11 @@ const router = createBrowserRouter([
         element: <News />
       },
       {
-        path: "blog/blog-details",
+        path: "/blog/:type/:name",
+        element: <NewsType />
+      },
+      {
+        path: "blog/details/:title",
         element: <NewsDetails />
       },
       {
@@ -114,11 +119,11 @@ const router = createBrowserRouter([
         element: <ManagementTeam />
       },
       {
-        path: "/board-member-details",
+        path: "/board-member/details/:id",
         element: <BoardMemberDetails />
       },
       {
-        path: "/management-team-details",
+        path: "/management-team/details/:id",
         element: <ManagementTeamDetails />
       },
       {
@@ -126,7 +131,7 @@ const router = createBrowserRouter([
         element: <Testimonial />
       },
       {
-        path: "/project-details",
+        path: "/getProject/details/:id",
         element: <ProjectsDetails />
       },
       {
@@ -134,7 +139,7 @@ const router = createBrowserRouter([
         element: <Faq />
       },
       {
-        path: "/what-we-do/service-details",
+        path: "/service/details/:id",
         element: <ServicesDetails />
       },
       {

@@ -1,0 +1,49 @@
+.popup-content{margin:auto;top:3%; position: relative; z-index: 1;
+    background:#fff; margin: auto; width:70%; padding:5px;border:1px solid #d7d7d7; height:70%; overflow: auto; padding-top:0px; }
+[role=tooltip]
+.popup-content{box-shadow:0 0 3px rgba(0,0,0,.16);border-radius:5px}
+
+.popup-overlay{background:rgba(0,0,0,.5)}
+[data-popup=tooltip].popup-overlay{background:transparent}
+.popup-arrow{-webkit-filter:drop-shadow(0 -3px 3px rgba(0,0,0,.16));filter:drop-shadow(0 -3px 3px rgba(0,0,0,.16));color:#fff;stroke-width:2px;stroke:#d7d7d7;stroke-dasharray:30px;stroke-dashoffset:-54px;left:0;right:0;top:0;bottom:0}
+.modalPop .container { padding-top: 40px;}
+
+.modalPop {
+    font-size: 16px; position: relative;
+  }
+  .headerTop { position: fixed; width: 68%; z-index: 9999; color: #fff; }
+  .modalPop  .header {
+    width: 68%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center; position: fixed;
+    padding: 5px; font-weight: bold; background: #EC3237;
+  }
+  .header.kilowatt { background: #0C894B !important; }
+  .header.skyview { background: #3B69BF !important; }
+  .modalPop > .content {
+    width: 100%;
+    padding: 10px 5px; margin-top: 20px; float: left;
+  }
+  .aboutContent { padding-top: 30px;}
+  .modalPop > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  }
+  .modalPop .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: 0px;
+    top: 0px;
+    font-size: 24px;
+    background: #EC3237; color: #fff;
+    /*border-radius: 18px;
+    border: 1px solid #cfcece; z-index: 9999999;*/
+  }
+  .modalPop .close.kilowatt { background: #0C894B; }
+  .modalPop .close.skyview { background: #3B69BF; }

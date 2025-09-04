@@ -1,9 +1,101 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AboutThumbImg from '../../assets/images/resource/about4-thumb.jpg';
 import AboutSide from './AboutSide.jsx';
+const imgPath = '/src/assets/images/resource/board_members';
 
 function About({ className }) {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [edge, setEdge] = useState([]);
+const [offer, setOffer] = useState([]);
+const [member, setMember] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getPage/who_we_are");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(ApiUrl + "electrix/ourEdge");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const result = await response.json();
+          setEdge(result);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoading(false);
+          setDataLoaded(true);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(ApiUrl + "electrix/ourOffer");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            setOffer(result);
+          } catch (error) {
+            setError(error);
+          } finally {
+            setLoading(false);
+            setDataLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+          const fetchData = async () => {
+            try {
+              const response = await fetch(ApiUrl + "electrix/getAboutBoardMember");
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              const result = await response.json();
+              setMember(result);
+            } catch (error) {
+              setError(error);
+            } finally {
+              setLoading(false);
+              setDataLoaded(true);
+            }
+          };
+      
+          fetchData();
+        }, []);
+
+
     return (
         <>
             
@@ -11,17 +103,20 @@ function About({ className }) {
                 <div className="container">
                 <div className="row">
                     <div className="col-xl-8 col-lg-7 general-details-page">
-                        <h2>About Income Electrix Limited</h2>
+                        <h2>{data.page_title}</h2>
                         
                         <div className="sec-about-title">
-                        <span className="sub-title">African-preferred provider of electrical engineering solutions</span>
+                        <span className="sub-title">{data.page_title_caption}</span>
                         </div>
                         <div className='page-content'>
+                        <div dangerouslySetInnerHTML={{ __html: data.page_content }} />
+                        
+                            {/*
                         Income Electrix Limited (IEL) is a full value chain African preferred provider of electrical engineering solutions from concept development to handing over the keys.
                         <br/><br/>
                         IEL operates as a Group of companies  through Strategic Alliances, providing end-to-end electromechanical solutions, from developing Project Concepts through Engineering, Local  & foreign Procurement, Construction, Commissioning, Operations, Maintenance, Manufacturing, Management, and Utility
                         <br/><br/>
-                        IEL manages a full range of techno-commercial support solutions which involves hardware, software and boots on the ground to the utilities and industries in Nigeria and Sub-Saharan Africa.</div>
+                        IEL manages a full range of techno-commercial support solutions which involves hardware, software and boots on the ground to the utilities and industries in Nigeria and Sub-Saharan Africa.*/}</div>
 
                         
                         <h2>Our Edge</h2>
@@ -29,8 +124,10 @@ function About({ className }) {
                         <div className="sec-about-title">
                         <span className="sub-title">What makes us stand out</span>
                         </div>
-                        <div className='page-content'>
-                        <ul className="list-style-four">
+                        <div className='page-content'>                            
+                        <div dangerouslySetInnerHTML={{ __html: edge.our_edge_snippet }} />
+                            {/*
+                        <ul>
                             <li>IEL is an African-preferred provider of electrical engineering solutions; with over three decades of verifiable experience in the West African power sector. 
                             </li>
                             <li>Experienced in difficult terrains; Niger Delta and  Northern Regions of Nigeria, Liberia and Sierra Leone. 
@@ -39,7 +136,7 @@ function About({ className }) {
                             </li>
                             <li>The IEL Group, is comprised of companies operating in various sectors of the Energy Industry
                             </li>
-                        </ul>
+                        </ul>*/}
                         </div>
 
                         
@@ -49,6 +146,8 @@ function About({ className }) {
                         <span className="sub-title">Professional Services we render to our clients</span>
                         </div>
                         <div className='page-content'>
+                        <div dangerouslySetInnerHTML={{ __html: offer.what_we_offer_snippet }} />
+                            {/*
                             <ul>
                                 <li>Engineering Procurement and Construction (EPC): Generation, Transmission and Distribution.
                                 </li>
@@ -65,7 +164,7 @@ function About({ className }) {
                                 <li>Manufacturing: Metering; Pre-stressed & pre-cast concrete products ; Electrical Components Assembly.
 
                                 </li>
-                            </ul>
+                            </ul>*/}
                         </div>
 
                         
@@ -77,11 +176,11 @@ function About({ className }) {
                         
                                             <div className="btn-box">
                                                 <div className="founder-info">
-                                                    <div className="thumb"><img src={AboutThumbImg} alt="Image"/></div>
-                                                    <h5 className="name">Dr. Matthew O. Edevbie</h5>
-                                                    <span className="designation">Group Managing Director</span>
+                                                    <div className="thumb"><img src={imgPath+"/"+member.board_director_pic} alt="Image"/></div>
+                                                    <h5 className="name">{member.board_director_name}</h5>
+                                                    <span className="designation">{member.board_director_designation}</span>
                                                 </div>
-                                                <Link to="/board-members" className="theme-btn btn-style-one bg-dark"><span className="btn-title">Explore now</span></Link>
+                                                <Link to={"/board-members/details/" + member.board_director_id} className="theme-btn btn-style-one bg-dark"><span className="btn-title">Explore now</span></Link>
                                             </div>
                                         </div>
                                     </div>

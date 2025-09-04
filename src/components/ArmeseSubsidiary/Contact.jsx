@@ -1,8 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ContactImage from '../../assets/images/resource/expert-group.png';
 
 
 function Contact({ className }) {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [contact, setContact] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "armese/getOpeningHours");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(ApiUrl + "armese/getContactInfo");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const result = await response.json();
+          setContact(result);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoading(false);
+          setDataLoaded(true);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+
     return (
         <>
             <section className={`contact-section-three style-three ${className || ''}`}>
@@ -20,13 +70,15 @@ function Contact({ className }) {
                                         <div className="inner">
                                             <h4 className="title">Opening Hour</h4>
                                             <ul>
-                                            {/*<li>Monday <span className="time-table">9am - 6pm</span></li>
-                                            <li>Tuesday <span className="time-table">9am - 6pm</span></li>
-                                            <li>Wednesday <span className="time-table">9am - 6pm</span></li>
-                                            <li>Thursday <span className="time-table">9am - 6pm</span></li>*/}
+                                            
+      {data.map(item => (
+            <li key={item.armese_opening_hour_id}>{item.armese_opening_hour_name} <span className="time-table">{item.armese_opening_hour_time}</span></li>
+
+        ))}
+{/*
                                                 <li>Mon-Fri <span className="time-table">9am - 6pm</span></li>
                                                 <li>Sat <span className="time-table">9am - 6pm</span></li>
-                                                <li>Sun <span className="time-table">Closed</span></li>
+                                                <li>Sun <span className="time-table">Closed</span></li>*/}
                                             </ul>
                                         </div>
                                     </div>
@@ -38,7 +90,7 @@ function Contact({ className }) {
                                                 <div className="inner-box ">
                                                     <i className="icon fa fa-phone"></i>
                                                     <div className="title">Looking For Consultation</div>
-                                                    <div className="text">(234) 803 727 2707, (234) 908 735 7690
+                                                    <div className="text">{contact.armese_contact_info_phone}  {/*(234) 803 727 2707, (234) 908 735 7690*/}
                                                     </div>
                                                 </div>
                                             </div>
@@ -46,10 +98,10 @@ function Contact({ className }) {
                                                 <div className="inner-box ">
                                                     <i className="icon fa fa-map-marker-alt"></i>
                                                     <div className="title">Visit Our Location</div>
-                                                    <div className="text">Km 16, PH/ Aba Expressway, 
+                                                    <div className="text">{contact.armese_contact_info_address}{/*Km 16, PH/ Aba Expressway, 
 Rumuokwrushi,
 Port Harcourt,
-Rivers State. 
+Rivers State. */}
 </div>
                                                 </div>
                                             </div>

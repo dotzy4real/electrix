@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ClientBgImg from '../../assets/images/background/24.jpg';
 import ClientImg1 from '../../assets/images/armese/clients/client1.jpg';
@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+const imgPath = '/src/assets/images/armese/clients/';
 
 
 const swiperOptions = {
@@ -46,6 +47,35 @@ const swiperOptions = {
 };
 
 function Client({ className }) {
+
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "armese/getClientPartners");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
     return (
         <>
     <section className={`clients-section feature-section-three style-two ${className || ''}`}>
@@ -56,6 +86,19 @@ function Client({ className }) {
               <h3>OUR CLIENTS AND PARTNERS</h3>
 	          </div>
 		     <Swiper {...swiperOptions} className="clients-carousel owl-theme disable-navs">
+
+                
+      {data.map(item => (
+        
+            <SwiperSlide key={item.armese_client_partner_id} className="client-block"> 
+            <Link to="#" className="image">
+                <img src={imgPath + item.armese_client_partner_pic} alt="Image"/> 
+                <img src={imgPath + item.armese_client_partner_pic} alt="Image"/> 
+            </Link> 
+            </SwiperSlide>
+        ))}
+
+{/*
                 <SwiperSlide className="client-block"> 
                     <Link to="#" className="image">
                         <img src={ClientImg1} alt="Image"/> 
@@ -97,7 +140,7 @@ function Client({ className }) {
                         <img src={ClientImg7} alt="Image"/> 
                         <img src={ClientImg7} alt="Image"/> 
                     </Link> 
-                </SwiperSlide>
+                </SwiperSlide>*/}
 		    </Swiper>
 		  </div>
 		</div>

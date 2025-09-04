@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ModalVideo from 'react-modal-video';
 import BannerBgImage1 from '../../assets/images/skyview/homebanners/homebanner1.jpeg';
@@ -9,6 +9,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import 'swiper/css/pagination';
+const BannerPath = '/src/assets/images/skyview/homebanners';
 
 const swiperOptions = {
     modules: [Autoplay, Pagination, Navigation],
@@ -25,13 +26,65 @@ const swiperOptions = {
 };
 
 function Banner({ className }) {
+
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+	const fetchData = async () => {
+	  try {
+		const response = await fetch(ApiUrl + "skyview/gethomebanners");
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		const result = await response.json();
+		setData(result);
+	  } catch (error) {
+		setError(error);
+	  } finally {
+		setLoading(false);
+		setDataLoaded(true);
+	  }
+	};
+
+	fetchData();
+  }, []);
+
+
+
 	  const [isOpen, setOpen] = useState(false);
     return (
         <>
+
+{  dataLoaded && (
     <section className={`banner-section-three ${className || ''}`}>
         <Swiper {...swiperOptions} className="banner-carousel owl-theme skyview">
                     <div className="swiper-button-prev"><i className="fa fa-chevron-left"></i></div>
                     <div className="swiper-button-next">{/**/}<i className="fa fa-chevron-right"></i></div>
+
+
+                    {data.map(item => (
+						<SwiperSlide className="slide-item">
+				<div className="overlay-2"/>
+				<div className="bg-image" style={{ backgroundImage: `url(${BannerPath + "/" + item.skyview_homebanner_pic})`}}/>
+				<div className="auto-container">
+					<div className="content-box">
+						<span className="sub-title animate-2">{item.skyview_homebanner_top_title}</span>
+						<h1 className="title animate-3"><div dangerouslySetInnerHTML={{ __html: item.skyview_homebanner_main_title }} /></h1>
+						<div className="btn-box animate-4">
+							<Link to={item.skyview_homebanner_button_link} className="theme-btn btn-style-one hvr-light"><span className="btn-title">{item.skyview_homebanner_button_text}</span></Link>
+						</div>
+					</div>
+				</div>
+			</SwiperSlide>
+
+))}
+
+{/*
 			<SwiperSlide className="slide-item">
 				<div className="overlay-2"/>
 				<div className="bg-image" style={{ backgroundImage: `url(${BannerBgImage1})`}}/>
@@ -42,11 +95,6 @@ function Banner({ className }) {
 						<div className="btn-box animate-4">
 							<Link to="/page-contact" className="theme-btn btn-style-one hvr-light"><span className="btn-title">CONTACT US NOW</span></Link>
 						</div>
-						{/*
-						<div className="video-box animate-4">
-							<a onClick={() => setOpen(true)} className="play-now" data-fancybox="gallery" data-caption=""><i className="icon fa fa-play" aria-hidden="true"></i></a>
-						</div>
-						<ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId="Fvae8nxzVz4" onClose={() => setOpen(false)} />*/}
 					</div>
 				</div>
 			</SwiperSlide>
@@ -60,10 +108,6 @@ function Banner({ className }) {
 						<div className="btn-box animate-4">
 							<Link to="/page-contact" className="theme-btn btn-style-one hvr-light"><span className="btn-title">CONTACT US NOW</span></Link>
 						</div>
-						{/*<div className="video-box animate-4">
-							<a onClick={() => setOpen(true)} className="play-now" data-fancybox="gallery" data-caption=""><i className="icon fa fa-play" aria-hidden="true"></i></a>
-						</div>
-						<ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId="Fvae8nxzVz4" onClose={() => setOpen(false)} />*/}
 					</div>
 				</div>
 			</SwiperSlide>
@@ -73,20 +117,15 @@ function Banner({ className }) {
 				<div className="auto-container">
 					<div className="content-box">
 						<span className="sub-title animate-2">Seasoned Professionals</span>
-						{/*<h1 className="title animate-3">Build <span>Quality<br className="d-none d-md-block"/>Electrical Services.</span></h1>*/}
 						<h1 className="title animate-3">Exceptional Customer Services.</h1>
 						<div className="btn-box animate-4">
 							<Link to="/page-contact" className="theme-btn btn-style-one hvr-light"><span className="btn-title">CONTACT US NOW</span></Link>
 						</div>
-						{/*<div className="video-box animate-4">
-							<a onClick={() => setOpen(true)} className="play-now" data-fancybox="gallery" data-caption=""><i className="icon fa fa-play" aria-hidden="true"></i></a>
-						</div>
-						<ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId="Fvae8nxzVz4" onClose={() => setOpen(false)} />*/}
 					</div>
 				</div>
-			</SwiperSlide>
+			</SwiperSlide>*/}
 		</Swiper>
-	</section>
+	</section>)}
         </>
     );
 }

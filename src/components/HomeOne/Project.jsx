@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectImage1 from '../../assets/images/resource/projects/252mw_gas.jpg';
 import ProjectImage2 from '../../assets/images/resource/projects/36.5_emergency.jpg';
@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+const imgPath = '/src/assets/images/resource/projects';
 
 
 const swiperOptions = {
@@ -46,17 +48,86 @@ const swiperOptions = {
 };
 
 function Project({ className }) {
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [projects, setProjects] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getProjects");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setProjects(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(ApiUrl + "electrix/getProjectSection");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const result = await response.json();
+          setData(result);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setLoading(false);
+          setDataLoaded(true);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
+
+
     return (
         <>
+        {  dataLoaded && (
             <section id="projects" className={`project-section ${className || ''}`}>
                 <div className="auto-container">
                     <div className="sec-title text-center light">
-                        <span className="sub-title">OUR WORK</span>
-                        <h2>We Have Delivered Best Electrical <br/>Solutions Across Africa</h2>
+                        <span className="sub-title">{data.project_section_icon_title}</span>
+                        <h2><div dangerouslySetInnerHTML={{ __html: data.project_section_title }} /></h2>
                     </div>
                 </div>
                 <div className="outer-box">
                 <Swiper {...swiperOptions} className="projects-carousel owl-theme default-dots">
+                {projects.map(item => (
+                <SwiperSlide key={item.project_id} className="project-block">
+                        <div className="inner-box">
+                            <div className="image-box">
+                            <figure className="image"><Link to="/page-project-details"><img src={imgPath+"/"+item.project_small_pic} alt="Image"/></Link></figure>
+                            </div>
+                            <div className="content-box">
+                            <Link to="/page-project-details" className="theme-btn read-more"><i className="far fa-arrow-up"></i></Link><br/>
+                            <h4 className="title"><Link to="/page-project-details">{item.project_title}</Link></h4>
+                            <span className="cat">{item.project_category_name}</span>
+                            </div>
+                            <div className="overlay-1"></div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+
+                    {/*
                     <SwiperSlide className="project-block">
                         <div className="inner-box">
                             <div className="image-box">
@@ -121,10 +192,10 @@ function Project({ className }) {
                             </div>
                             <div className="overlay-1"></div>
                         </div>
-                    </SwiperSlide>
+                    </SwiperSlide>*/}
                 </Swiper>
                 </div>
-            </section>
+            </section>)}
         </>
     );
 }

@@ -1,16 +1,75 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate  } from 'react-router-dom';
 import BackToTop from '../BackToTop.jsx';
 import InnerHeader from '../InnerHeader.jsx';
 import Footer from '../HomeOne/Footer.jsx';
 import PageTitle from '../PageTitle.jsx';
 import ProgressBar from '../../lib/ProgressBar.jsx';
 import PageBanner from '../../assets/images/resource/pagebanners/board members.png';
+const imgPath = '/src/assets/images/resource/pagebanners';
 
 // Import images
 import TeamDetailsImg from '../../assets/images/resource/board_members/mathew_edevbie.jpg';
+const teamImgPath = '/src/assets/images/resource/board_members';
 
 function TeamDetails() {
+
+const { id } = useParams("id");
+const navigate = useNavigate();
+
+const ApiUrl = import.meta.env.VITE_API_URL;
+const [data, setData] = useState([]);
+const [member, setMember] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+    console.log("checking");
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getBoardMember/"+id);
+        if (!response.ok) { console.log("it broke");
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("checking here");
+        setMember(result);
+        console.log("member board id: " + member.board_director_id);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(ApiUrl + "electrix/getPage/board_members");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+        setDataLoaded(true);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
     return (
         <>
             <InnerHeader />
@@ -18,11 +77,20 @@ function TeamDetails() {
                 title="Board Member"
                 breadcrumb={[
                     { link: '/', title: 'Home' },
-                    { link: '/board-members', title: 'Board Members' },
-                    { title: 'General Alexander Ogomudia (Rtd.)' },
+                    { link: '/board-members', title: data.page_breadcumb_title },
+                    { title: member.board_director_name },
                 ]}
-                banner={PageBanner}
+                banner={imgPath+"/"+data.page_banner}
             />
+
+
+{(() => {
+                                            if (member.length === 0)
+                                            {
+            {navigate('/page-doest-not-exist')}
+                                            } else {
+            
+return (
             <section className="team-details">
                 <div className=""/>
                 <div className="container pb-100">
@@ -30,7 +98,7 @@ function TeamDetails() {
                         <div className="row">
                             <div className="col-xl-6 col-lg-6">
                                 <div className="team-details__top-left">
-                                    <div className="team-details__top-img"> <img src={TeamDetailsImg} alt="Image"/>
+                                    <div className="team-details__top-img"> <img src={teamImgPath+"/"+member.board_director_pic} alt="Image"/>
                                         <div className="team-details__big-text"></div>
                                     </div>
                                 </div>
@@ -38,9 +106,12 @@ function TeamDetails() {
                             <div className="col-xl-6 col-lg-6">
                                 <div className="team-details__top-right">
                                     <div className="team-details__top-content">
-                                        <h3 className="team-details__top-name">General Alexander Ogomudia (Rtd.)</h3>
-                                        <p className="team-details__top-title">Chairman</p>
-                                        <p className="page-content team">General Alexander Odeareduo Ogomudia (Rtd) CFR DSS FWC PSC(+) MSc FNSE is a retired Nigerian Military officer who served as Chief of Defence Staff and Chief of Army Staff.
+                                        <h3 className="team-details__top-name">{member.board_director_name}</h3>
+                                        <p className="team-details__top-title">{member.board_director_designation}</p>
+                                        <p className="page-content team">
+                                        <div dangerouslySetInnerHTML={{ __html: member.board_director_content }} />
+                                        
+                                            {/*General Alexander Odeareduo Ogomudia (Rtd) CFR DSS FWC PSC(+) MSc FNSE is a retired Nigerian Military officer who served as Chief of Defence Staff and Chief of Army Staff.
 <br/><br/>
 General Ogomudia attended a number of military and civil courses at home and abroad. He attended Signal Officers Basic Course (SOBC 19) USA, Signals Officers' Degree Engineer Course (India), Diploma Electrical Electronics Engineering, Obafemi Awolowo University Ile-Ife, Battalion Commanders' Course Jaji, National War College Course Lagos and University of Ibadan amongst others.
 <br/><br/>
@@ -48,16 +119,29 @@ He was appointed Chief of Army Staff in 2001 and served as Chief of Defence Staf
 <br/><br/>
 He joined the Nigerian Defence Academy (NDA) as a cadet in 1969 and is of NDA 7th Regular Course. He was commissioned in 1972 into the Nigerian Military Signal as Second Lieutenant with effect from October 1969. He grew through the ranks and held several senior military positions including; Directing Staff at Command and Staff College, Commander 53 Armoured Division Headquarters and Signal, Director of Telecommunications at Headquarters Nigerian Military Signals, Directing Staff, at National War College, Commandant Nigerian Military Signals and School and General Officer Commanding 1 Mechanized Division Nigerian Military.
 <br/><br/>
-He is married with children. His hobbies include Music, Farming and Engineering Design.
+He is married with children. His hobbies include Music, Farming and Engineering Design.*/}
 </p>
+                                        {(() => {
+                                            if (member.board_director_email != "")
+                                            {
+                                                return (
                                         <div className="team-details-contact mb-30">
                                             <h5 className="mb-0">Email Address</h5>
-                                            <div className=""><span>info@incomeelectrix.com</span></div>
-                                        </div>
-                                        <div className="team-details-contact mb-30">
-                                            <h5 className="mb-0">Phone Number</h5>
-                                            <div className=""><span>+012-3456-789</span></div>
-                                        </div>
+                                            <div className=""><span>{member.board_director_email}</span></div>
+                                        </div>);
+                                        }
+                                        })()}
+
+                                        {(() => {
+                                            if (member.board_director_phone != "")
+                                            {
+                                                return (
+                                                <div className="team-details-contact mb-30">
+                                                    <h5 className="mb-0">Phone Number</h5>
+                                                    <div className=""><span>{member.board_director_phone}</span></div>
+                                                </div>);
+                                        }
+                                        })()}
                                         {/*
                                         <div className="team-details-contact">
                                             <h5 className="mb-0">Web Address</h5>
@@ -89,7 +173,9 @@ He is married with children. His hobbies include Music, Farming and Engineering 
                         </div>
                     </div>*/}
                 </div>
-            </section>
+            </section>)
+        }
+})()}
 
             {/*
             <section className="team-contact-form">

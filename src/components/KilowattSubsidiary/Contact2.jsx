@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ContactImage from '../../assets/images/resource/expert-group.png';
 
 
 function Contact({ className }) {
+    
+    
+    const ApiUrl = import.meta.env.VITE_API_URL;
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(ApiUrl + "kilowatt/getContactInfo");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            setData(result);
+          } catch (error) {
+            setError(error);
+          } finally {
+            setLoading(false);
+            setDataLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+      
     return (
         <>
             <section className={`contact-section-three style-three ${className || ''}`}>
@@ -38,18 +67,22 @@ function Contact({ className }) {
                                                 <div className="inner-box ">
                                                     <i className="icon fa fa-phone"></i>
                                                     <div className="title">Looking For Consultation</div>
-                                                    <div className="text">0705 -599-0710                                                    </div>
+                                                    <div className="text">
+                                                        {data.kilowatt_contact_info_phone}                                                    
+                                                        </div>
                                                 </div>
                                             </div>
                                             <div className="contact-details-block">
                                                 <div className="inner-box ">
                                                     <i className="icon fa fa-map-marker-alt"></i>
                                                     <div className="title">Visit Our Location</div>
-                                                    <div className="text">Kilowatt Engineering Limited, 
+                                                    <div className="text">
+                                                        {data.kilowatt_contact_info_address}
+                                                        {/*Kilowatt Engineering Limited, 
 6B, Peter Odili Road, Trans Amadi,
 Port Harcourt, 
 Rivers State,
-Nigeria.
+Nigeria.*/}
 </div>
                                                 </div>
                                             </div>

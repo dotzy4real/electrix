@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import ProjectThumb1 from '../../assets/images/kilowatt/projects/project1.jpg';
 import ProjectThumb2 from '../../assets/images/kilowatt/projects/project2.jpg';
@@ -8,6 +8,35 @@ import ProjectThumb5 from '../../assets/images/kilowatt/projects/project2.jpg';
 import ProjectThumb6 from '../../assets/images/kilowatt/projects/project1.jpg';
 
 function Footer({ className }) {
+    
+    
+    const ApiUrl = import.meta.env.VITE_API_URL;
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(ApiUrl + "kilowatt/getContactInfo");
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            setData(result);
+          } catch (error) {
+            setError(error);
+          } finally {
+            setLoading(false);
+            setDataLoaded(true);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+
     return (
         <>
             <footer className={`main-footer ${className || ''}`}>
@@ -32,7 +61,7 @@ function Footer({ className }) {
                                     <ul className="user-links">
                                         <li><Link to="#">About Company</Link></li>
                                         <li><Link to="#">Meet the Team</Link></li>
-                                        <li><Link to="#">News & Media</Link></li>
+                                        <li><Link to="#">How We Work</Link></li>
                                         <li><Link to="#">Our Projects</Link></li>
                                         <li><Link to="#">Contact</Link></li>
                                     </ul>
@@ -42,16 +71,18 @@ function Footer({ className }) {
                                 <div className="footer-widget contact-widget">
                                     <h5 className="widget-title">Contact</h5>
                                     <div className="widget-content">
-                                        <div className="text">Kilowatt Engineering Limited, 
+                                        <div className="text">
+                                            {data.kilowatt_contact_info_address}
+                                            {/*Kilowatt Engineering Limited, 
 6B, Peter Odili Road, Trans Amadi,
 Port Harcourt, 
 Rivers State,
-Nigeria.
+Nigeria.*/}
 </div>
                                         <ul className="contact-info">
-                                            <li><i className="fa fa-envelope"></i> <Link to="mailto:info@kilowatteng.com">info@kilowatteng.com
+                                            <li><i className="fa fa-envelope"></i> <Link to={"mailto:"+data.kilowatt_contact_info_email}>{data.kilowatt_contact_info_email}
                                             </Link><br /></li>
-                                            <li><i className="fa fa-phone-square"></i> <Link to="tel:07055990710">0705 -599-0710
+                                            <li><i className="fa fa-phone-square"></i> <Link to="tel:07055990710">{data.kilowatt_contact_info_phone}
                                             </Link><br /></li>
                                         </ul>
                                     </div>
