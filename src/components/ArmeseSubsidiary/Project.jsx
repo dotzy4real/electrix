@@ -81,6 +81,8 @@ useEffect(() => {
 
     fetchData();
   }, []);
+
+  
     return (
         <>
     {  dataLoaded && <section id="projects" className={`project-section style-three ${className || ''}`}>
