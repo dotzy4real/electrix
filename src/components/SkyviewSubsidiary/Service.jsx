@@ -83,7 +83,7 @@ useEffect(() => {
 
     return (
         <>
-    <section id="services" className={`services-section-two skyview ${className || ''}`}>
+    <section id="SkyviewServices" className={`services-section-two skyview ${className || ''}`}>
 		<div className="bg bg-image" style={{ backgroundImage: `url(${ServiceBgImg})`}}/>
 		<div className="auto-container skyview-services">
 			<div className="sec-title skyview text-center">

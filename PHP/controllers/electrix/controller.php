@@ -169,6 +169,26 @@ public function __construct(Utility $utility){
 			$this->getProject();
 			break;
 			
+			case 'getJobVacancySection':
+			$this->getJobVacancySection();
+			break;
+			
+			case 'getAvailableJobVacancies':
+			$this->getAvailableJobVacancies();
+			break;
+			
+			case 'submitJobPosition':
+			$this->submitJobPosition();
+			break;
+			
+			case 'sendRequestQuote':
+			$this->sendRequestQuote();
+			break;
+			
+			case 'sendContactMessage':
+			$this->sendContactMessage();
+			break;
+			
 			default:
 			print $this->urlpassed; exit;
 			$this->loadShop();
@@ -197,6 +217,91 @@ function getHomeAbout()
 {
 	$homeAbout = $this->utility->getHomeAbout();
 	print json_encode($homeAbout); exit;
+}
+
+function sendRequestQuote()
+{
+
+	$data = array();
+	$data["error"] = "";
+	$data["success"] = "";
+	try
+	{
+		$firstName = $this->utility->sanitize(ucwords($_POST["first_name"]));
+		$lastName = $this->utility->sanitize(ucwords($_POST["last_name"]));
+		$email = $this->utility->sanitize($_POST["email"]);
+		$phone = $this->utility->sanitize($_POST["phone"]);
+		$company = $this->utility->sanitize($_POST["company"]);
+		$address = $this->utility->sanitize($_POST["address"]);
+		$message = $this->utility->sanitize($_POST["message"]);
+		$this->utility->sendRequestQuote($firstName, $lastName, $email, $phone, $company, $address, $message);
+		$data["success"] = "Form submission successful";
+		$data["statusMessage"] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fa fa-check'></i> Your Quote Request Was Sent Successfully</button></div>";
+	} catch (Exception $ex)
+	{
+		$data["error"] = $ex->getMessage();
+		$data["statusMessage"] = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Their was en error submitting your quote request</div>";
+	}
+
+	print json_encode($data); exit;
+}
+
+function sendContactMessage()
+{
+
+	$data = array();
+	$data["error"] = "";
+	$data["success"] = "";
+	try
+	{
+		$fullName = $_POST["full_name"];
+		$email = $_POST["email"];
+		$phone = $_POST["phone"];
+		$subject = $_POST["subject"];
+		$message = $_POST["message"];
+		$this->utility->sendContactMessage($fullName, $email, $phone, $subject, $message);
+		$data["success"] = "Form submission successful";
+		$data["statusMessage"] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fa fa-check'></i> Your Message Was Sent Successfully</button></div>";
+	} catch (Exception $ex)
+	{
+		$data["error"] = $ex->getMessage();
+		$data["statusMessage"] = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Their was en error submitting your message</div>";
+	}
+
+	print json_encode($data); exit;
+}
+
+function submitJobPosition()
+{
+
+	$data = array();
+	$data["error"] = "";
+	$data["success"] = "";
+	try
+	{
+		$firstName = $_POST["first_name"];
+		$lastName = $_POST["last_name"];
+		$email = $_POST["email"];
+		$phone = $_POST["phone"];
+		$position = $_POST["position"];
+		$coverLetter = $_POST["cover_letter"];
+		$fileNameExt = $_FILES['resume']['name'];
+		$fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
+		$filetype = pathinfo($_FILES['resume']['name'], PATHINFO_EXTENSION);
+		$time = time();
+		$uploadName = $fileName."_".$time.".".$filetype;
+		$uploadPath = "../src/assets/docs/resume/".$uploadName;
+		move_uploaded_file($_FILES['resume']['tmp_name'],$uploadPath);
+		$this->utility->submitJobPosition($firstName, $lastName, $email, $phone, $position, $coverLetter,$uploadName);
+		$data["success"] = "Form submission successful";
+		$data["statusMessage"] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fa fa-check'></i> Your Job Application Was Successful</button></div>";
+	} catch (Exception $ex)
+	{
+		$data["error"] = $ex->getMessage();
+		$data["statusMessage"] = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Their was en error submitting your application</div>";
+	}
+
+	print json_encode($data); exit;
 }
 
 function loadAccomplishment()
@@ -339,6 +444,18 @@ function getPage()
 		$error = $this->utility->apiError("Page does not exist");
 		print json_encode($error); exit;
 	}
+}
+
+function getJobVacancySection()
+{
+	$jobVacancies = $this->utility->getJobVacancySection();
+	print json_encode($jobVacancies); exit;
+}
+
+function getAvailableJobVacancies()
+{
+	$jobVacancies = $this->utility->getAvailableJobVacancies();
+	print json_encode($jobVacancies); exit;
 }
 
 function ourEdge()

@@ -84,7 +84,7 @@ const [dataLoaded, setDataLoaded] = useState(false);
     return (
         <>
         {  dataLoaded && (
-            <section className={`team-section-two kilowatt ${className || ''}`}>
+            <section id="kilowattTeam" className={`team-section-two kilowatt ${className || ''}`}>
                 <div className="shape-25 bounce-x"/>
                 <div className="auto-container kilowatt">
                     <div className="sec-title kilowatt">

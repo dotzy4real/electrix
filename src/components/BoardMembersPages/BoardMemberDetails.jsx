@@ -13,9 +13,16 @@ import TeamDetailsImg from '../../assets/images/resource/board_members/mathew_ed
 const teamImgPath = '/src/assets/images/resource/board_members';
 
 function TeamDetails() {
-
-const { id } = useParams("id");
+        
+const { title } = useParams("title");
+let id = null;
+if (title && typeof title === "string")
+{
+    id = title.split("-").pop();
+}
 const navigate = useNavigate();
+
+let memberExist = false;
 
 const ApiUrl = import.meta.env.VITE_API_URL;
 const [data, setData] = useState([]);
@@ -69,6 +76,11 @@ useEffect(() => {
   }, []);
 
 
+  if (Object.keys(member).length !== 0)
+  {
+    memberExist = true;
+  }
+
 
     return (
         <>
@@ -82,18 +94,15 @@ useEffect(() => {
                 ]}
                 banner={imgPath+"/"+data.page_banner}
             />
-
-
-{(() => {
-                                            if (member.length === 0)
-                                            {
-            {navigate('/page-doest-not-exist')}
-                                            } else {
-            
-return (
             <section className="team-details">
                 <div className=""/>
                 <div className="container pb-100">
+
+{ !memberExist ?             
+                                    <div dangerouslySetInnerHTML={{ __html: "<h4>This board member you are looking for does not exist</h4>" }} /> : "" }
+
+ 
+    {memberExist &&
                     <div className="team-details__top pb-70">
                         <div className="row">
                             <div className="col-xl-6 col-lg-6">
@@ -153,6 +162,7 @@ He is married with children. His hobbies include Music, Farming and Engineering 
                             </div>
                         </div>
                     </div>
+        }
                     {/*<div className="team-details__bottom pt-100">
                         <div className="row">
                             <div className="col-xl-6 col-lg-6">
@@ -173,9 +183,8 @@ He is married with children. His hobbies include Music, Farming and Engineering 
                         </div>
                     </div>*/}
                 </div>
-            </section>)
-        }
-})()}
+            </section>
+
 
             {/*
             <section className="team-contact-form">

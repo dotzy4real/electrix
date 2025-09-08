@@ -14,7 +14,7 @@ import TeamImg9 from '../../assets/images/resource/management_team/eric_peekate.
 const imgPath = '/src/assets/images/resource/management_team';
 
 function ManagementTeam() {
-
+	
 const ApiUrl = import.meta.env.VITE_API_URL;
 const [data, setData] = useState([]);
 const [member, setMember] = useState([]);
@@ -64,9 +64,9 @@ useEffect(() => {
 					<div className="team-block mb-30">
 						<div className="inner-box">
 						<div className="image-box">
-							<figure className="image"><Link to={"/management-team/details/"+item.management_team_id}><img src={imgPath+"/"+item.management_team_pic} alt="Image"/></Link></figure>
+							<figure className="image"><Link to={"/management-team/details/"+item.management_team_urltitle+"-"+item.management_team_id}><img src={imgPath+"/"+item.management_team_pic} alt="Image"/></Link></figure>
 							<div className="info-box">
-							<h4 className="name"><Link to={"/management-team/details/"+item.management_team_id}>{item.management_team_name}</Link></h4>
+							<h4 className="name"><Link to={"/management-team/details/"+item.management_team_urltitle+"-"+item.management_team_id}>{item.management_team_name}</Link></h4>
 							<span className="designation">{item.management_team_designation}</span> <span className="share-icon fa fa-share-alt"></span>
 							<div className="social-links">
 								<Link to={item.management_team_linkedin}><i className="fab fa-linkedin"></i></Link>

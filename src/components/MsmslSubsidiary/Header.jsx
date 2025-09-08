@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
 import useScrollPosition from "../../lib/useScrollPosition.js";
 import logo1 from '../../assets/images/msmsl-logo.png';
 import Stickylogo from '../../assets/images/msmsl-logo.png';
@@ -80,7 +81,7 @@ Akwa Ibom
 
                             {/* <!-- Btn Box --> */}
                             <div className="btn-box">
-                                <Link to="" className="theme-btn btn-style-one bg-dark"><span className="btn-title">MESSAGE US</span></Link>
+                                <ScrollLink  to="MsmslContact" smooth={true} duration={500} className="theme-btn btn-style-one bg-dark"><span className="btn-title">MESSAGE US</span></ScrollLink>
                             </div>
                             
                             {/* <!-- Mobile Nav toggler --> */}

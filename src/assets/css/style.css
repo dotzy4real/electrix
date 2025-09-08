@@ -170,6 +170,10 @@ body {
   line-height: var(--body-line-height);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 p, .text {
   color: var(--text-color);
   font-size: var(--body-font-size);
@@ -1910,8 +1914,8 @@ Scroll To Top style
   top: 0%;
   height: 100%;
   width: 100%;
-  content: "";
-  background-color: var(--bg-theme-color1);
+  content: ""; background: #fff; color:#333;
+  /*background-color: var(--bg-theme-color1);*/
   -webkit-transform: scale(1, 0);
           transform: scale(1, 0);
   -webkit-transform-origin: bottom left;
@@ -2095,6 +2099,8 @@ Scroll To Top style
           box-shadow: 0 5px 40px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
 }
+.acc-btn span { font-size: 13px; font-style: italic; font-weight: bold; float:right; color:#999;}
+.acc-btn span b { font-size: 13px; font-style: italic; font-weight: bold; color:#999;}
 .accordion-box .block .acc-btn {
   position: relative;
   color: var(--headings-color);
@@ -2105,7 +2111,7 @@ Scroll To Top style
   padding: 20px 30px;
   padding-right: 70px;
   -webkit-transition: all 500ms ease;
-  transition: all 500ms ease;
+  transition: all 500ms ease; width:100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .accordion-box .block .acc-btn .icon {
@@ -18450,7 +18456,7 @@ header.main-header.header-style-three .btn-box {
   }
 }
 .contact-section .form-column .inner-column {
-  padding: 120px 0 0;
+  padding: 140px 0 0;
 }
 @media (max-width: 991.98px) {
   .contact-section .form-column .inner-column {

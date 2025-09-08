@@ -5,7 +5,7 @@ import ContactImage from '../../assets/images/msmsl/contact.jpg';
 function Contact({ className }) {
     return (
         <>
-            <section id="contact" className={`contact-section-seven pb-0 ${className || ''}`}>
+            <section id="MsmslContact" className={`contact-section-seven pb-0 ${className || ''}`}>
                 <div className="contact6"/>
                 <div className="auto-container">
                     <div className="row align-items-center">

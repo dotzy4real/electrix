@@ -68,7 +68,7 @@ useEffect(() => {
 
 
                     {data.map(item => (
-						<SwiperSlide className="slide-item">
+						<SwiperSlide key={item.skyview_homebanner_id} className="slide-item">
 				<div className="overlay-2"/>
 				<div className="bg-image" style={{ backgroundImage: `url(${BannerPath + "/" + item.skyview_homebanner_pic})`}}/>
 				<div className="auto-container">

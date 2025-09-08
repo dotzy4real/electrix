@@ -68,7 +68,7 @@ useEffect(() => {
                         <h3 className="sidebar__title">Core Values</h3>
                         <ul className="sidebar__category-list list-unstyled  about_in_side">
                             {data.map(item => (
-                                <li><i className="fa fa-check-circle"></i> {item.our_value_title}<span className="icon-right-arrow"></span> </li>
+                                <li key={item.our_value_id}><i className="fa fa-check-circle"></i> {item.our_value_title}<span className="icon-right-arrow"></span> </li>
                             ))}
 {/*
                             <li><i className="fa fa-check-circle"></i> Professionalism<span className="icon-right-arrow"></span> </li>

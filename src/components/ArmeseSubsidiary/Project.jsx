@@ -85,7 +85,7 @@ useEffect(() => {
   
     return (
         <>
-    {  dataLoaded && <section id="projects" className={`project-section style-three ${className || ''}`}>
+    {  dataLoaded && <section id="armeseProject" className={`project-section style-three ${className || ''}`}>
 		<div className="auto-container">
 			<div className="sec-title">
 				<span className="sub-title">RECENT PROJECTS</span>

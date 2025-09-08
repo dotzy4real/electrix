@@ -40,7 +40,7 @@ function About({ className }) {
 
     return (
         <>
-            <section className={`about-section-eight style-two ${className || ''}`}>
+            <section id="MsmslAbout" className={`about-section-eight style-two ${className || ''}`}>
                 <div className="auto-container">
                     <div className="row">
                         <div className="content-column col-xl-6 col-lg-7 order-2 wow fadeInRight" data-wow-delay="600ms">

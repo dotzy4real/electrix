@@ -55,7 +55,7 @@ useEffect(() => {
 
     return (
         <>
-            <section className={`contact-section-three style-three ${className || ''}`}>
+            <section id="ArmeseContact" className={`contact-section-three style-three ${className || ''}`}>
                 <div className="auto-container">
                     <div className="row">
                         <div className="content-column col-lg-6 col-md-12 col-sm-12 order-2">

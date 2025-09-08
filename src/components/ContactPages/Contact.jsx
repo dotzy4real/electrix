@@ -60,6 +60,52 @@ useEffect(() => {
 	  fetchData();
 	}, []);
 
+	
+	const [fullName, setFullName] = useState('');
+	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+	const [subject, setSubject] = useState('');
+	const [message, setMessage] = useState('');
+	const [statusMessage, setStatusMessage] = useState("");
+
+	  
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		//if (!validate()) return;
+	
+		const data = new FormData();
+		data.append('full_name', fullName);
+		data.append('email', email);
+		data.append('phone', phone);
+		data.append('subject', subject);
+		data.append('message', message);
+		console.log("form data: " + JSON.stringify(data));
+		try {
+		  const response = await fetch(ApiUrl + "electrix/sendContactMessage", {
+			method: 'POST',
+			body: data
+			// Do NOT set 'Content-Type' header when using FormData
+		  });
+		  console.log(response);
+		  const result = await response.json();
+		  console.log('Success:', result);
+		  if (result.error == "")
+		  {
+			  setFullName("");
+			  setPhone("");
+			  setEmail("");
+			  setSubject("");
+			  setMessage("");
+			  alert('Contact Message Sent Successfully!');
+		  }
+		  else
+			  alert("An error occured when submitting your contact message");
+		  setStatusMessage(result.statusMessage);
+		} catch (error) {
+		  console.error('Error submitting form:', error);
+		  setStatusMessage("<div class='alert alert-danger alert-dismissible fade show' role='alert'>An Internal Error Occured when submitting your form</div>");
+		}
+	};
 
 
     return (
@@ -82,33 +128,34 @@ useEffect(() => {
 	  						<span className="sub-title">Send us email</span>
 	  						<h2>Feel free to write</h2>
 	  					</div>
-	  					<form id="contact_form" name="contact_form" action="/page-contact" method="get">
+	  					<form id="contact_form" onSubmit={handleSubmit}>
 	  						<div className="row">
+				  <div className='col-md-12'><div dangerouslySetInnerHTML={{ __html: statusMessage }} /></div>
 	  							<div className="col-sm-6">
 	  								<div className="mb-3">
-	  									<input name="form_name" className="form-control" type="text" placeholder="Enter Name"/>
+	  									<input name="full_name" className="form-control" value={fullName || ''} onChange={(e) => setFullName(e.target.value)} type="text" placeholder="Enter Name" required/>
 	  								</div>
 	  							</div>
 	  							<div className="col-sm-6">
 	  								<div className="mb-3">
-	  									<input name="form_email" className="form-control required email" type="email" placeholder="Enter Email"/>
+	  									<input name="email" value={email || ''}  onChange={(e) => setEmail(e.target.value)} className="form-control required email" type="email" placeholder="Enter Email" required/>
 	  								</div>
 	  							</div>
 	  						</div>
 	  						<div className="row">
 	  							<div className="col-sm-6">
 	  								<div className="mb-3">
-	  									<input name="form_subject" className="form-control required" type="text" placeholder="Enter Subject"/>
+	  									<input name="subject" value={subject || ''}  onChange={(e) => setSubject(e.target.value)} className="form-control required" type="text" placeholder="Enter Subject" required/>
 	  								</div>
 	  							</div>
 	  							<div className="col-sm-6">
 	  								<div className="mb-3">
-	  									<input name="form_phone" className="form-control" type="text" placeholder="Enter Phone"/>
+	  									<input name="phone" value={phone || ''}  onChange={(e) => setPhone(e.target.value)} pattern="^\+?[0-9]{8,15}$" required className="form-control" type="text" placeholder="Enter Phone"/>
 	  								</div>
 	  							</div>
 	  						</div>
 	  						<div className="mb-3">
-	  							<textarea name="form_message" className="form-control required" rows="7" placeholder="Enter Message"></textarea>
+	  							<textarea name="message" value={message || ''} onChange={(e) => setMessage(e.target.value)} className="form-control required" rows="7" placeholder="Enter Message" required></textarea>
 	  						</div>
 	  						<div className="mb-5">
 	  							<input name="form_botcheck" className="form-control" type="hidden" value="" />

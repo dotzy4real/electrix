@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import { BrowserRouter } from 'react-router-dom';
 import './assets/css/bootstrap.min.css';
 import './assets/css/style.css';
+import './assets/css/linear.css';
 import './assets/css/react-popup.css';
 // import './assets/css/style-dark.css';
 

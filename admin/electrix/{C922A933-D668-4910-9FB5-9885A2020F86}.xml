@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<configuration date="2025/09/08" author="e.World Technology Ltd.">
+<project id="{C922A933-D668-4910-9FB5-9885A2020F86}" file="C:\xampp\htdocs\electrix\electrix.pmp" name="electrix" product="PHPMaker" version="12.0" datetime="2025/09/08 06:05:25" languagefolder="phplang" userlevel="-2,&quot;Anonymous&quot;,0;">
+<table id="accomplishments" name="accomplishments" caption="accomplishments" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_about" name="armese_about" caption="armese about" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_capabilities" name="armese_capabilities" caption="armese capabilities" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_client_partners" name="armese_client_partners" caption="armese client partners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_contact_info" name="armese_contact_info" caption="armese contact info" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_homebanners" name="armese_homebanners" caption="armese homebanners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_management_team" name="armese_management_team" caption="armese management team" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_opening_hours" name="armese_opening_hours" caption="armese opening hours" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_project_categories" name="armese_project_categories" caption="armese project categories" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_projects" name="armese_projects" caption="armese projects" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="armese_services" name="armese_services" caption="armese services" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="blog" name="blog" caption="blog" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="blog_categories" name="blog_categories" caption="blog categories" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="blog_tag_map" name="blog_tag_map" caption="blog tag map" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="blog_tags" name="blog_tags" caption="blog tags" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="board_directors" name="board_directors" caption="board directors" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="contact_info" name="contact_info" caption="contact info" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="feature_lists" name="feature_lists" caption="feature lists" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="features" name="features" caption="features" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="home_about" name="home_about" caption="home about" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="homebanners" name="homebanners" caption="homebanners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="job_submissions" name="job_submissions" caption="job submissions" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="job_vacancies" name="job_vacancies" caption="job vacancies" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="job_vacancy_section" name="job_vacancy_section" caption="job vacancy section" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_about" name="kilowatt_about" caption="kilowatt about" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_benefits" name="kilowatt_benefits" caption="kilowatt benefits" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_contact_info" name="kilowatt_contact_info" caption="kilowatt contact info" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_homebanners" name="kilowatt_homebanners" caption="kilowatt homebanners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_management_team" name="kilowatt_management_team" caption="kilowatt management team" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_projects" name="kilowatt_projects" caption="kilowatt projects" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_service_category" name="kilowatt_service_category" caption="kilowatt service category" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_services" name="kilowatt_services" caption="kilowatt services" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="kilowatt_work_how" name="kilowatt_work_how" caption="kilowatt work how" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="management_team" name="management_team" caption="management team" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="mission_vision" name="mission_vision" caption="mission vision" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_about" name="msmsl_about" caption="msmsl about" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_choose_us" name="msmsl_choose_us" caption="msmsl choose us" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_choose_us_items" name="msmsl_choose_us_items" caption="msmsl choose us items" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_client_partners" name="msmsl_client_partners" caption="msmsl client partners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_contact_info" name="msmsl_contact_info" caption="msmsl contact info" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_equipments" name="msmsl_equipments" caption="msmsl equipments" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_homebanners" name="msmsl_homebanners" caption="msmsl homebanners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_management_team" name="msmsl_management_team" caption="msmsl management team" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_mission_edge" name="msmsl_mission_edge" caption="msmsl mission edge" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_project_categories" name="msmsl_project_categories" caption="msmsl project categories" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="msmsl_projects" name="msmsl_projects" caption="msmsl projects" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="our_edge" name="our_edge" caption="our edge" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="our_values" name="our_values" caption="our values" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="pages" name="pages" caption="pages" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="project_categories" name="project_categories" caption="project categories" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="project_section" name="project_section" caption="project section" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="projects" name="projects" caption="projects" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="request_quote" name="request_quote" caption="request quote" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="services" name="services" caption="services" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="skyview_about" name="skyview_about" caption="skyview about" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="skyview_contact_info" name="skyview_contact_info" caption="skyview contact info" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="skyview_homebanners" name="skyview_homebanners" caption="skyview homebanners" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="skyview_services" name="skyview_services" caption="skyview services" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+<table id="what_we_offer" name="what_we_offer" caption="what we offer" userlevel="-2,&quot;Anonymous&quot;,0;" priv="1"/>
+</project></configuration>

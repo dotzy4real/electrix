@@ -59,7 +59,7 @@ function Feature({ className }) {
         <>
 
 	{/* <!-- Feature Section --> */}
-	<section className="feature-section-three">
+	<section id="armeseCapabilities" className="feature-section-three">
 	  <div className="pattern-7 bounce-x"/>
 	  <div className="shape-16"/>
 	  <div className="auto-container">

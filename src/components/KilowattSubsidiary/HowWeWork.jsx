@@ -34,7 +34,7 @@ function Service({ className }) {
 
     return (
         <>
-            <section id="services" className={`services-section-four ${className || ''}`}>
+            <section id="kilowattWork" className={`services-section-four ${className || ''}`}>
                 <div className="auto-container">
                     <div className="sec-title text-center kilowatt">
                         <span className="sub-title">HOW WE WORK</span>

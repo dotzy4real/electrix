@@ -99,7 +99,7 @@ function Project({ className }) {
 
     return (
         <>
-            <section className={`project-section-three ${className || ''}`}>
+            <section id="MsmslProject" className={`project-section-three ${className || ''}`}>
                 <div className="bg bg-image" style={{ backgroundImage: `url(${ProjectBgImage})` }}/>
                 <div className="auto-container armese-projects">
                     <div className="sec-title light">

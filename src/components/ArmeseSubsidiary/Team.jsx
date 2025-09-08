@@ -87,7 +87,7 @@ function Team({ className }) {
     return (
         <>
         {  dataLoaded && (
-    <section className="team-section">
+    <section id="armeseTeam" className="team-section">
 		<div className="bg bg-image" style={{ backgroundImage: `url(${TeamBgImg})`}}/>
 		<div className="auto-container">
             <div className="sec-title text-center">
@@ -130,11 +130,11 @@ function Team({ className }) {
 	  </p>
 											<div className="team-details-contact mb-30">
 												<h5 className="mb-0">Email Address</h5>
-												<div className=""><span>{item.armese_management_team_email}</span></div>
+												<div className=""><span>{item.armese_management_team_email ?? "N/A"}</span></div>
 											</div>
 											<div className="team-details-contact mb-30">
 												<h5 className="mb-0">Phone Number</h5>
-												<div className=""><span>{item.armese_management_team_phone}</span></div>
+												<div className=""><span>{item.armese_management_team_phone ?? "N/A"}</span></div>
 											</div>
 											<div className="team-details__social"> <Link to={item.armese_management_team_linkedin == "" ? "#" : item.armese_management_team_linkedin}><i className="fab fa-linkedin"></i></Link><Link to={item.armese_management_team_facebook == "" ? "#" : item.armese_management_team_facebook}><i className="fab fa-facebook"></i></Link><Link to={item.armese_management_team_twitter == "" ? "#" : item.armese_management_team_twitter}><i className="fab fa-twitter"></i></Link></div>
 										</div>

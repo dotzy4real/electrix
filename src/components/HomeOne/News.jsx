@@ -51,7 +51,7 @@ useEffect(() => {
                         <div className="inner-box">
                             <div className="image-box">
                                 <figure className="image">
-                                    <Link to="/news-details">
+                                    <Link to={"/blog/details/"+item.blog_urltitle+"-"+item.blog_id}>
                                         <img src={imgPath+"/"+item.blog_pic} alt=""/>
                                     </Link>
                                 </figure>
@@ -62,10 +62,10 @@ useEffect(() => {
                                     <li><i className="fa fa-user"></i> By admin</li>
                                     <li><i className="fa fa-tag"></i> {item.blog_category_name}</li>
                                 </ul>
-                                <h4 className="title"><Link to="/news-details">{item.blog_title}</Link></h4>
+                                <h4 className="title"><Link to={"/blog/details/"+item.blog_urltitle+"-"+item.blog_id}>{item.blog_title}</Link></h4>
                             </div>
                             <div className="bottom-box">
-                                <Link to="/news-details" className="read-more">READ MORE <i className="fa fa-long-arrow-alt-right"></i></Link>
+                                <Link to={"/blog/details/"+item.blog_urltitle+"-"+item.blog_id} className="read-more">READ MORE <i className="fa fa-long-arrow-alt-right"></i></Link>
                                 {/*<div className="comments"><i className="fa fa-comments"></i> (05)</div>*/}
                             </div>
                         </div>

@@ -38,7 +38,7 @@ useEffect(() => {
 
                     {data.map((item, index) => (
 
-                        <div className="feature-block col-xl-3 col-sm-6 wow fadeInUp">
+                        <div key={item.our_value_id} className="feature-block col-xl-3 col-sm-6 wow fadeInUp">
                             <div className="inner-box">
                                 <div className="icon-box">
                                     <i className="icon flaticon-050-protect"></i>
@@ -46,7 +46,7 @@ useEffect(() => {
                                 </div>
                                 <div className="content">
                                     <h5 className="title">
-                                        <Link to="/page-about">{item.our_value_title}</Link>
+                                        {item.our_value_title}
                                     </h5>
                                     <div className="text">{item.our_value_snippet}</div>
                                 </div>

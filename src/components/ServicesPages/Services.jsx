@@ -47,14 +47,14 @@ function Services() {
                             <div className="service-block-two">
                                 <div className="inner-box">
                                     <div className="image-box">
-                                        <figure className="image"><Link to={"/service/details/"+item.service_id}><img src={imgPath+"/"+item.service_small_pic} alt="Image"/></Link></figure>
+                                        <figure className="image"><Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id}><img src={imgPath+"/"+item.service_small_pic} alt="Image"/></Link></figure>
                                     </div>
                                     <div className="content-box">
                                         <div className="inner"> <i className="icon flaticon-049-wiring"></i>
-                                            <h4 className="title"><Link to="/what-we-do/service-details">{item.service_title}</Link></h4>
+                                            <h4 className="title"><Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id}>{item.service_title}</Link></h4>
                                             <div className="text">{item.service_snippet}</div>
                                         </div>
-                                        <Link to={"/service/details/"+item.service_id} className="theme-btn btn-style-one dark-bg"><span className="btn-title">READ MORE <i className="fa fa-arrow-right"></i></span></Link>
+                                        <Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id} className="theme-btn btn-style-one dark-bg"><span className="btn-title">READ MORE <i className="fa fa-arrow-right"></i></span></Link>
                                     </div>
                                 </div>
                             </div>

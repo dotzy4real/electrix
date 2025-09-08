@@ -88,7 +88,7 @@ function ChooseUs({ className }) {
 
     return (
         <>
-            <section className={`why-choose-us-two msmsl ${className || ''}`}>
+            <section id="MsmslEdge" className={`why-choose-us-two msmsl ${className || ''}`}>
                 <div className="icon-dots-3"/>
                 <div className="auto-container">
                 <div className="outer-box">

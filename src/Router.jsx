@@ -119,11 +119,11 @@ const router = createBrowserRouter([
         element: <ManagementTeam />
       },
       {
-        path: "/board-member/details/:id",
+        path: "/board-member/details/:title",
         element: <BoardMemberDetails />
       },
       {
-        path: "/management-team/details/:id",
+        path: "/management-team/details/:title",
         element: <ManagementTeamDetails />
       },
       {
@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         element: <Testimonial />
       },
       {
-        path: "/getProject/details/:id",
+        path: "/getProject/details/:title",
         element: <ProjectsDetails />
       },
       {
@@ -139,7 +139,7 @@ const router = createBrowserRouter([
         element: <Faq />
       },
       {
-        path: "/service/details/:id",
+        path: "/service/details/:title",
         element: <ServicesDetails />
       },
       {

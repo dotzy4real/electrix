@@ -52,15 +52,15 @@ useEffect(() => {
                         
                 {data.map(item => (
         
-                    <div className="service-block col-lg-4 col-md-6">
+                    <div key={item.service_id} className="service-block col-lg-4 col-md-6">
                         <div className="inner-box">
                             <div className="image-box">
-                                <figure className="image"><Link to="/page-service-details"><img className="w-100" src={imgPath+"/"+item.service_small_pic} alt="Image"/></Link></figure>
-                                <Link to="{/page-service-details}" className="theme-btn read-more">READ MORE <i className="fa fa-arrow-up"></i></Link>
+                                <figure className="image"><Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id}><img className="w-100" src={imgPath+"/"+item.service_small_pic} alt="Image"/></Link></figure>
+                                <Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id} className="theme-btn read-more">READ MORE <i className="fa fa-arrow-up"></i></Link>
                             </div>
                             <div className="content-box">
                                 <div className="info-box"> <i className={"icon " + item.service_icon}></i>
-                                    <h4 className="title"><Link to="/page-service-details">{item.service_title}
+                                    <h4 className="title"><Link to={"/service/details/"+item.service_urltitle+"-"+item.service_id}>{item.service_title}
                                     </Link></h4>
                                 </div>
                                 <div className="inner">

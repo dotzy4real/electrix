@@ -39,7 +39,7 @@ function About({ className }) {
      const [isOpen, setOpen] = useState(false);
     return (
         <>
-            <section className={`about-section ${className || ''}`}>
+            <section id="SkyviewAbout" className={`about-section ${className || ''}`}>
                 <div className="icon-plane-1"/>
                 <div className="auto-container skyview">
                     <div className="outer-box">

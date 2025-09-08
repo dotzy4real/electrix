@@ -34,6 +34,7 @@ function NewsDetails() {
     const [dataLoaded, setDataLoaded] = useState(false);
     let isBlogTag = false;
     let blogTagMsg = "";
+    let blogExist = false;
     
     useEffect(() => {
         const fetchData = async () => {
@@ -175,6 +176,12 @@ function NewsDetails() {
                 console.log("blog tag msg: " + blogTagMsg);
 
 
+                if (Object.keys(blog).length !== 0)
+                {
+                  blogExist = true;
+                }
+
+
     return (
         <>
             <InnerHeader />
@@ -191,6 +198,13 @@ function NewsDetails() {
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-8 col-lg-7">
+                          
+
+{ !blogExist ?             
+                                    <div dangerouslySetInnerHTML={{ __html: "<h4>The blog post you are looking for does not exist</h4>" }} /> : "" }
+
+ 
+    {blogExist &&
                             <div className="blog-details__left">
                                 <div className="blog-details__img">
                                     <img src={imgPath+"/"+blog.blog_pic} alt="Image"/>
@@ -219,6 +233,7 @@ function NewsDetails() {
                                     <div className="blog-details__social-list"> <Link to="/blog/blog-details"><i className="fab fa-twitter"></i></Link> <Link to={"/blog/tag/"}><i className="fab fa-facebook"></i></Link> <Link to="/blog/blog-details"><i className="fab fa-pinterest-p"></i></Link> <Link to="/blog/blog-details"><i className="fab fa-instagram"></i></Link> </div>
                                     </div>
                                 </div>
+}
                                 {/*
                                 <div className="nav-links">
                                     <div className="prev">

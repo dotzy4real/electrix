@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
 import useScrollPosition from "../../lib/useScrollPosition.js";
 import logo1 from '../../assets/images/armese-logo1.png';
 import Stickylogo from '../../assets/images/armese-logo1.png';
@@ -48,7 +49,7 @@ function Header({ className = '', scroll = false}) {
                                 <div className="outer-box">
                                     {/* <!-- Btn Box --> */}
                                     <div className="btn-box">
-                                        <Link to="/page-contact" className="theme-btn btn-style-one bg-light"><span className="btn-title">BOOKING NOW</span></Link>
+                                        <ScrollLink to="ArmeseContact" smooth={true} duration={500} className="theme-btn btn-style-one bg-light"><span className="btn-title">BOOKING NOW</span></ScrollLink>
                                     </div>
 
                                     {/* <!-- Mobile Nav toggler --> */}

@@ -122,7 +122,7 @@ const [dataLoaded, setDataLoaded] = useState(false);
     return (
         <>
         {  dataLoaded && (
-            <section className={`project-section-three kilowatt ${className || ''}`}>
+            <section id="kilowattProject" className={`project-section-three kilowatt ${className || ''}`}>
                 <div className="bg bg-image" style={{ backgroundImage: `url(${ProjectBgImage})` }}/>
                 <div className="auto-container kilowatt-projects">
                     <div className="sec-title light">

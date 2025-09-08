@@ -85,7 +85,7 @@ const [dataLoaded, setDataLoaded] = useState(false);
 
     return (
         <>
-            <section className={`team-section-two msmsl ${className || ''}`}>
+            <section id="MsmslTeam" className={`team-section-two msmsl ${className || ''}`}>
                 <div className="shape-25 bounce-x"/>
                 <div className="auto-container">
                     <div className="sec-title">

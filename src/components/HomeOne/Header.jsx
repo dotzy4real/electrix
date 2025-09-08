@@ -5,6 +5,8 @@ import logo1 from '../../assets/images/logo1.png';
 import Stickylogo from '../../assets/images/logo1.png';
 import Navigation from '../Navigation.jsx';
 import MobileMenu from '../MobileMenu.jsx';
+import { Link as ScrollLink } from "react-scroll";
+import * as Scroll from "react-scroll";
 
 function Header({ className = '', scroll = false}) {
     const [menuState, setMenuState] = useState({
@@ -45,7 +47,7 @@ function Header({ className = '', scroll = false}) {
                             </nav>
                             <div className="outer-box">
                                 <div className="btn-box">
-                                    <Link to="/page-contact" className="theme-btn btn-style-one bg-light"><span className="btn-title">GET A QUOTE</span></Link>
+                                    <ScrollLink to="getQuote" smooth={true} duration={500} className="theme-btn btn-style-one bg-light"><span className="btn-title">GET A QUOTE</span></ScrollLink>
                                 </div>
 
                                 {/* <!-- Mobile Nav toggler --> */}

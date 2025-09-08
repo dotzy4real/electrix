@@ -115,11 +115,11 @@ useEffect(() => {
                 <SwiperSlide key={item.project_id} className="project-block">
                         <div className="inner-box">
                             <div className="image-box">
-                            <figure className="image"><Link to="/page-project-details"><img src={imgPath+"/"+item.project_small_pic} alt="Image"/></Link></figure>
+                            <figure className="image"><Link to={"/getProject/details/"+item.project_urltitle+"-"+item.project_id}><img src={imgPath+"/"+item.project_small_pic} alt="Image"/></Link></figure>
                             </div>
                             <div className="content-box">
-                            <Link to="/page-project-details" className="theme-btn read-more"><i className="far fa-arrow-up"></i></Link><br/>
-                            <h4 className="title"><Link to="/page-project-details">{item.project_title}</Link></h4>
+                            <Link to={"/getProject/details/"+item.project_urltitle+"-"+item.project_id} className="theme-btn read-more"><i className="far fa-arrow-up"></i></Link><br/>
+                            <h4 className="title"><Link to={"/getProject/details/"+item.project_urltitle+"-"+item.project_id}>{item.project_title}</Link></h4>
                             <span className="cat">{item.project_category_name}</span>
                             </div>
                             <div className="overlay-1"></div>

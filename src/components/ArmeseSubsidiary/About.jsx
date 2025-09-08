@@ -50,7 +50,7 @@ function About({ className }) {
     return (
         <>
 		
-    <section id='/Armese#armeseAbout' className={`about-section-four armese ${className || ''}`}>
+    <section id='armeseAbout' className={`about-section-four armese ${className || ''}`}>
 		<div className="auto-container">
 			<div className="row">
 				<div className="content-column col-xl-7 col-md-12 col-sm-12 order-lg-2 wow fadeInRight" data-wow-delay="600ms">

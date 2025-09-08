@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
 import ProjectThumb1 from '../../assets/images/kilowatt/projects/project1.jpg';
 import ProjectThumb2 from '../../assets/images/kilowatt/projects/project2.jpg';
 import ProjectThumb3 from '../../assets/images/kilowatt/projects/project3.jpg';
@@ -59,11 +60,11 @@ function Footer({ className }) {
                                 <div className="footer-widget">
                                     <h5 className="widget-title">Explore</h5>
                                     <ul className="user-links">
-                                        <li><Link to="#">About Company</Link></li>
-                                        <li><Link to="#">Meet the Team</Link></li>
-                                        <li><Link to="#">How We Work</Link></li>
-                                        <li><Link to="#">Our Projects</Link></li>
-                                        <li><Link to="#">Contact</Link></li>
+                                        <li><ScrollLink to="kilowattAbout" smooth={true} duration={500}>About Company</ScrollLink></li>
+                                        <li><ScrollLink to="kilowattTeam" smooth={true} duration={500}>Meet the Team</ScrollLink></li>
+                                        <li><ScrollLink to="kilowattWork" smooth={true} duration={500}>How We Work</ScrollLink></li>
+                                        <li><ScrollLink to="kilowattProject" smooth={true} duration={500}>Our Projects</ScrollLink></li>
+                                        <li><ScrollLink to="kilowattContact" smooth={true} duration={500}>Contact</ScrollLink></li>
                                     </ul>
                                 </div>
                             </div>

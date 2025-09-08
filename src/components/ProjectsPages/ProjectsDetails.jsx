@@ -16,7 +16,13 @@ const imgPath = '/src/assets/images/resource/projects';
 
 function ProjectsDetails() {    
         
-        const { id } = useParams("id");
+                
+        const { title } = useParams("title");
+        let id = null;
+        if (title && typeof title === "string")
+        {
+            id = title.split("-").pop();
+        }
         const ApiUrl = import.meta.env.VITE_API_URL;
         const [data, setData] = useState([]);
         const [project, setProject] = useState([]);

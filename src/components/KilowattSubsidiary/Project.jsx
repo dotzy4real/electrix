@@ -8,7 +8,7 @@ import ProjectImage4 from '../../assets/images/resource/product-img-4.jpg';
 function Project({ className }) {
     return (
         <>
-    <section id="projects" className={`products-section ${className || ''}`}>
+    <section className={`products-section ${className || ''}`}>
 		<div className="bg-pattern-7"/>
 		<div className="auto-container">
 			<div className="sec-title text-center">

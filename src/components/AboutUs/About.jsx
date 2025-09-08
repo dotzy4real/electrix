@@ -180,7 +180,7 @@ useEffect(() => {
                                                     <h5 className="name">{member.board_director_name}</h5>
                                                     <span className="designation">{member.board_director_designation}</span>
                                                 </div>
-                                                <Link to={"/board-members/details/" + member.board_director_id} className="theme-btn btn-style-one bg-dark"><span className="btn-title">Explore now</span></Link>
+                                                <Link to={"/board-member/details/" + member.board_director_urltitle + "-" + member.board_director_id} className="theme-btn btn-style-one bg-dark"><span className="btn-title">Explore now</span></Link>
                                             </div>
                                         </div>
                                     </div>

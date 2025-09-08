@@ -47,7 +47,7 @@ function About({ className }) {
 
     return (
         <>
-            <section className={`about-section-five ${className || ''}`}>
+            <section id="kilowattAbout" className={`about-section-five ${className || ''}`}>
                 <div className="shape-23 bounce-y"/>
                 <div className="auto-container kilowatt">
                     <div className="row">

@@ -14,9 +14,15 @@ const teamImgPath = '/src/assets/images/resource/management_team';
 
 function TeamDetails() {
 
+        
+const { title } = useParams("title");
+let id = null;
+if (title && typeof title === "string")
+{
+    id = title.split("-").pop();
+}
 
-const { id } = useParams("id");
-const navigate = useNavigate();
+let memberExist = false;
 
 const ApiUrl = import.meta.env.VITE_API_URL;
 const [data, setData] = useState([]);
@@ -70,6 +76,12 @@ useEffect(() => {
   }, []);
 
 
+  if (Object.keys(member).length !== 0)
+  {
+    memberExist = true;
+  }
+
+
     return (
         <>
         {  memberLoaded && ( <div>
@@ -88,16 +100,16 @@ useEffect(() => {
 
 
 
-{(() => {
-                                            if (member.length === 0)
-                                            {
-            {navigate('/page-doest-not-exist')}
-                                            } else {
             
-return (
             <section className="team-details">
                 <div className=""/>
                 <div className="container pb-100">
+
+{ !memberExist ?             
+                                    <div dangerouslySetInnerHTML={{ __html: "<h4>This management team you are looking for does not exist</h4>" }} /> : "" }
+
+ 
+    {memberExist &&
                     <div className="team-details__top pb-70">
                         <div className="row">
                             <div className="col-xl-6 col-lg-6">
@@ -148,7 +160,7 @@ return (
                             </div>
                         </div>
                     </div>
-
+}
                     {/*
 
                                             
@@ -216,8 +228,6 @@ A graduate with a B.Sc. (Hons) in Electrical Engineering from the University of 
 
 </div>
             </section>)
-        }
-})()}
 
                         {/*}
             <section className="team-contact-form">

@@ -15,7 +15,7 @@ public $recipientEmail;
 private $timeout;
 private $remembermeTimeout;
 
-public $domain = "http://unlimitedresource.com.ng/1751_tees";
+public $domain = "http://unlimitedresource.com.ng/electrix";
 
 function __construct(){
 	/*
@@ -25,7 +25,7 @@ function __construct(){
 		$this->site_url = "http://localhost:81/1751_tees/";	
 	}*/
 	$this->error = "error.php";
-	$this->recipientEmail = "info@1751.com";
+	$this->recipientEmail = "info@electrix.com";
 	$this->timeout = 60*30;
 	$this->remembermeTimeout = 60*60*24*30;
 }
@@ -91,7 +91,7 @@ function querySql($query)
 	try {
 		$this->database->executeQuery($query);
 	} catch (Exception $e) {
-		die (mysql_error());
+		die (mysqli_error($this->database->returnActiveConnection()));
 		$e->getMessage();
 	}
 }
@@ -270,18 +270,17 @@ function getServices($limit="")
 	$limitQuery = empty($limit) ? "" : " limit $limit";
 	$query = "select * from services where status = 'active' order by sort_order $limitQuery"; //print $query; exit;
 	$this->execute($query);
-	if (empty($limit))
+	$services = array();
+	$i = 0;
+	foreach ($this->result as $service)
 	{
-		$services = array();
-		$i = 0;
-		foreach ($this->result as $service)
-		{
-			$services[] = $service;
-			$services[$i]["service_snippet"] = strip_tags(stripslashes(substr($service['service_content'], 0, 80)));
-			$i++;
-		}
-		return $services;
+		$services[] = $service;
+		$services[$i]["service_snippet"] = strip_tags(stripslashes(substr($service['service_content'], 0, 80)));
+		$services[$i]["service_urltitle"] = $this->urlTitle($service["service_title"]);
+		$i++;
 	}
+	return $services;
+	
 	return $this->result;
 }
 
@@ -334,6 +333,15 @@ function getProjects()
 {
 	$query = "select * from projects as a, project_categories as b where a.project_category_id = b.project_category_id and status = 'active' order by sort_order";
 	$this->execute($query);
+	$projects = array();
+	$i = 0;
+	foreach ($this->result as $project)
+	{
+		$projects[] = $project;
+		$projects[$i]["project_urltitle"] = $this->urlTitle($project["project_title"]);
+		$i++;
+	}
+	return $projects;
 	return $this->result;
 }
 
@@ -564,10 +572,61 @@ function getOffer()
 	return $this->result[0];
 }
 
+function getJobVacancySection()
+{
+	$query = "select * from job_vacancy_section order by job_vacancy_section_id limit 1";
+	$this->execute($query);
+	if (count($this->result) > 0)
+		return $this->result[0];
+}
+
+function getAvailableJobVacancies()
+{
+	$query = "select * from job_vacancies order by job_vacancy_date_posted desc";
+	$this->execute($query);
+	return $this->result;
+}
+
+function sendRequestQuote($firstName, $lastName, $email, $phone, $company, $address, $message)
+{
+	$query = "insert into request_quote (first_name, last_name, email, phone, company, address, message) values ('$firstName', '$lastName','$email', '$phone', '$company', '$address', '$message')";
+	$this->querySql($query);
+	$message = "A Quote request was submitted, below are the details:<br/><br/><br/>
+	First Name: ".$firstName."<br/><br/>
+	Last Name: ".$lastName."<br/><br/>
+	Email: ".$email."<br/><br/>
+	Phone: ".$phone."<br/><br/>
+	Address: ".$address."<br/><br/>
+	Message: ".$message."<br/><br/>";
+	$toEmail = $this->recipientEmail;
+	$this->sendEmail("Request Quote From ".$firstName." ".$lastName, $message, $toEmail, $firstName." ".$lastName, $email);
+}
+
+function sendContactMessage($fullName, $email, $phone, $subject, $message)
+{
+	$message = "A contact message was submitted, below are the details:<br/><br/><br/>
+	Full Name: ".$fullName."<br/><br/>
+	Email: ".$email."<br/><br/>
+	Phone: ".$phone."<br/><br/>
+	Subject: ".$subject."<br/><br/>
+	Message: ".$message."<br/><br/>";
+	$toEmail = $this->recipientEmail;
+	$this->sendEmail("A Contact Message Was Submitted From ".$fullName, $message, $toEmail, $fullName, $email);
+}
+
+function submitJobPosition($firstName, $lastName, $email, $phone, $position, $coverLetter,$uploadName)
+{
+	$query = "insert into job_submissions (first_name, last_name, email, phone, position, resume, cover_letter) values ('$firstName', '$lastName','$email', '$phone', '$position', '$uploadName', '$coverLetter')";
+	$this->querySql($query);
+	$message = "Dear $firstName $lastName, <br/><br/>This is to inform you your job application was successful via our career website. If your qualification closely matches with the position we are looking for, we will contact you.<br/><br/><br/><br/>Electrix Career Team";
+	$this->sendEmail("Your Job Application was Submitted Successfully", $message, $email, "Electrix Careers");
+}
+
 function getAboutBoardMember()
 {
 	$query = "select * from board_directors as a, home_about as b where a.board_director_id = b.home_about_board_director_id and a.status = 'active'";
 	$this->execute($query);
+	$this->result[0]["board_director_urltitle"] = $this->urlTitle($this->result[0]["board_director_name"]);
 	return $this->result[0];
 }
 
@@ -585,6 +644,15 @@ function fetchBoardMembers()
 {
 	$query = "select * from board_directors where status = 'active' order by sort_order";
 	$this->execute($query);
+	$members = array();
+	$i = 0;
+	foreach ($this->result as $member)
+	{
+		$members[] = $member;
+		$members[$i]["board_director_urltitle"] = $this->urlTitle("$member[board_director_name]");
+		$i++;
+	}
+	return $members;
 	return $this->result;
 }
 
@@ -610,6 +678,18 @@ function fetchManagementTeam($tableName="management_team")
 {
 	$query = "select * from $tableName where status = 'active' order by sort_order";
 	$this->execute($query);
+	if ($tableName == "management_team")
+	{
+		$members = array();
+		$i = 0;
+		foreach ($this->result as $member)
+		{
+			$members[] = $member;
+			$members[$i]["management_team_urltitle"] = $this->urlTitle("$member[management_team_name]");
+			$i++;
+		}
+		return $members;
+	}
 	return $this->result;
 }
 
@@ -947,11 +1027,12 @@ function newsletterSubscriberExists($email)
 }
 
 
-function sendEmail($subject, $message, $toSendEmail){
-	$recipientEmail = $this->recipientEmail;
+function sendEmail($subject, $message, $toSendEmail, $fromName, $recipientEmail = ""){
+	if (empty($recipientEmail))
+		$recipientEmail = $this->recipientEmail;
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From: 1751 <$recipientEmail>" . "\r\n";
+    $headers .= "From: $fromName <$recipientEmail>" . "\r\n";
     //mail($toSendEmail, $subject, $message, $headers);
     
 }

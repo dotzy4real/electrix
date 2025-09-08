@@ -54,9 +54,9 @@ useEffect(() => {
 			    <div className="team-block mb-30">
 			      <div className="inner-box">
 			        <div className="image-box">
-			          <figure className="image"><Link to={"/board-member/details/"+item.board_director_id}><img src={imgPath+"/"+item.board_director_pic} alt="Image"/></Link></figure>
+			          <figure className="image"><Link to={"/board-member/details/"+item.board_director_urltitle+"-"+item.board_director_id}><img src={imgPath+"/"+item.board_director_pic} alt="Image"/></Link></figure>
 			          <div className="info-box">
-			            <h4 className="name"><Link to={"/board-member/details/"+item.board_director_id}>{item.board_director_name}</Link></h4>
+			            <h4 className="name"><Link to={"/board-member/details/"+item.board_director_urltitle+"-"+item.board_director_id}>{item.board_director_name}</Link></h4>
 			            <span className="designation">{item.board_director_designation}</span> <span className="share-icon fa fa-share-alt"></span>
 			            <div className="social-links">
 			              <Link to={item.board_director_linkedin}><i className="fab fa-linkedin"></i></Link>
